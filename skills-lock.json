@@ -7,6 +7,13 @@
       "skillPath": "skills/engineering/ask-matt/SKILL.md",
       "computedHash": "e5404aef8525ca0c8fc76692567a38dfdd5d0cc1a9f8d47c02c18f29f60d92a6"
     },
+    "commit-messages": {
+      "source": "https://gitlab.com/gitlab-org/ai/skills.git",
+      "sourceUrl": "https://gitlab.com/gitlab-org/ai/skills.git",
+      "sourceType": "gitlab",
+      "skillPath": "skills/commit-messages/SKILL.md",
+      "computedHash": "da296322aafdcbf581a29b50d9bafe8eca2163d495126211f414dcd9085ed73f"
+    },
     "domain-modeling": {
       "source": "mattpocock/skills",
       "sourceType": "github",
