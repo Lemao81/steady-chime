@@ -10,6 +10,11 @@ SteadyChime is a bare Expo SDK 57 / React Native 0.86 / React 19 app, currently 
 unmodified Expo TypeScript starter (`App.tsx` renders the placeholder screen). There is no
 app-specific architecture yet — when adding structure, establish it rather than looking for it.
 
+## Expo skills
+
+The bundled `expo:*` skills don't know this project's SDK pin — when a skill's example conflicts
+with the v57 docs, `AGENTS.md` wins. Confirm any API against the versioned docs before using it.
+
 ## Package manager
 
 **pnpm** (`pnpm-lock.yaml`). Do not run `npm install` / `yarn` — it will desync the lockfile.
