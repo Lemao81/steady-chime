@@ -68,3 +68,13 @@ No test runner, linter, or formatter is configured — there is nothing to run f
   - Always use single quotes, matching the Biome config's `quoteStyle`.
   - Import a directory's `index` module by the directory alone — `<dir>`, never `<dir>/index`.
   - Insert an empty line after a multi-line block statement (`if`, `for`, `while`, `do`/`while`, `switch`, `try`/`catch`), unless it is the last statement in its scope. Never insert one before a continuation keyword (`} else {`, `} catch {`, `} finally {`, `} while (…);`).
+
+## Agent skills
+
+### Issue tracker
+
+Issues and specs live as local markdown files under `.scratch/<feature>/`. See `docs/agents/issue-tracker.md`.
+
+### Domain docs
+
+Single-context: one root `CONTEXT.md` plus `docs/adr/`. See `docs/agents/domain.md`.
