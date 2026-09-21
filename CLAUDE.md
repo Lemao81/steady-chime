@@ -73,7 +73,10 @@ No test runner, linter, or formatter is configured — there is nothing to run f
 
 ### Issue tracker
 
-Issues and specs live as local markdown files under `.scratch/<feature>/`. See `docs/agents/issue-tracker.md`.
+Issues and specs live as local markdown files under `.scratch/<feature>/`. Issues are sized by
+feature; a `plan.md` next to them breaks each issue into single-commit steps as checkboxes, grouped
+under their issue. "Move on with the plan" does exactly one step, commits it and stops. See
+`docs/agents/issue-tracker.md`.
 
 ### Domain docs
 
