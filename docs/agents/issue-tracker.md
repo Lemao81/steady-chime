@@ -19,7 +19,7 @@ Every set of implementation issues gets a plan at `.scratch/<feature-slug>/plan.
 - `plan.md` has one `## [NN Issue title](issues/NN-slug.md)` heading per issue, with its steps below as checkboxes (`- [ ] 1.1 Step title`), in execution order.
 - Mark a step that edits `package.json` with 📦: the user runs `pnpm install` before reviewing it.
 - Decisions that must wait until work starts go in an issue's `## Open decisions (ask the user before starting)` section.
-- "Move on with the plan" means: take the next unticked step; if it is the first step of its issue, read the issue and ask its open decisions first, recording the answers in the issue; do only that step, commit it, tick its box in the same commit, and stop. When an issue's last step is ticked, set its `Status:` to `resolved`.
+- "Move on with the plan" means: take the next unticked step; if it is the first step of its issue, read the issue and ask its open decisions first, recording the answers in the issue; do only that step, tick its box, and stop without committing; commit the step and its tick together only when the user explicitly says to. When an issue's last step is ticked, set its `Status:` to `resolved`.
 
 ## When a skill says "publish to the issue tracker"
 

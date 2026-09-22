@@ -1,6 +1,6 @@
 # SteadyChime v1 plan
 
-Spec: [spec.md](spec.md). Each checkbox is one commit; "move on with the plan" means: do the next unticked step, commit, tick it, stop.
+Spec: [spec.md](spec.md). Each checkbox is one commit; "move on with the plan" means: do the next unticked step, tick it, stop; commit only when told.
 Before the first step of an issue, read the issue; if it has an "Open decisions" section, ask the user first and record the answers in the issue.
 Steps marked 📦 edit `package.json`: run `pnpm install` on the host before reviewing.
 When the last step of an issue is ticked, set the issue's `Status:` to `resolved`.
