@@ -31,10 +31,12 @@ pnpm install          # install deps
 pnpm start            # Metro bundler / Expo dev server
 pnpm android          # dev server + open on Android
 pnpm ios              # dev server + open on iOS
+pnpm test             # jest-expo unit tests
 ```
 
-No test runner, linter, or formatter is configured — there is nothing to run for those, and
-`npx tsc --noEmit` is the only type check available.
+Unit tests are jest-expo; they live in `__tests__` directories and are named `*-test.ts(x)`.
+No linter or formatter is configured — there is nothing to run for those, and `npx tsc --noEmit`
+is the only type check available.
 
 ## Conventions
 

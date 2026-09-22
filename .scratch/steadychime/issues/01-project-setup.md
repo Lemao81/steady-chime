@@ -1,6 +1,6 @@
 # 01 Project setup
 
-Status: open
+Status: resolved
 Blocked by: none
 
 Align the starter project with the spec's Config section and add unit test tooling (ADR 0002).
