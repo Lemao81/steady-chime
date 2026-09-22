@@ -31,7 +31,6 @@ pnpm install          # install deps
 pnpm start            # Metro bundler / Expo dev server
 pnpm android          # dev server + open on Android
 pnpm ios              # dev server + open on iOS
-pnpm web              # dev server + open in browser
 ```
 
 No test runner, linter, or formatter is configured — there is nothing to run for those, and

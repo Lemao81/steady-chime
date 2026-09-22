@@ -7,7 +7,7 @@ When the last step of an issue is ticked, set the issue's `Status:` to `resolved
 
 ## [01 Project setup](issues/01-project-setup.md)
 
-- [ ] 1.1 App config cleanup
+- [x] 1.1 App config cleanup
 - [ ] 1.2 📦 Unit test tooling
 
 ## [02 Chime schedule logic](issues/02-chime-schedule-logic.md)
