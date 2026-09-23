@@ -14,6 +14,7 @@ Persistent settings, two-tab navigation and localization, so feature screens hav
 ## Open decisions (ask the user before starting)
 
 - Step 2: Expo Router normally uses `expo-router/entry` as `main`, which conflicts with the `CLAUDE.md` convention "entry point is `index.ts` … leave that indirection in place". Decide, then update `CLAUDE.md` accordingly.
+  - **Answer (2026-09-23):** use `expo-router/entry` as `main`; delete `index.ts` together with `App.tsx` and rewrite the `CLAUDE.md` entry-point convention to match.
 
 ## Acceptance
 

@@ -1,4 +1,4 @@
-import type { INTERVALS } from '@/constants';
+import type { ACTIVITY_STATES, CHIME_SOUNDS, INTERVALS } from '@/constants';
 
 export type Interval = (typeof INTERVALS)[number];
 
@@ -9,9 +9,19 @@ export type ActiveWindow = {
 
 export type ChimeSlot = number;
 
-export type ActivityState = 'active' | 'paused';
+export type ActivityState = (typeof ACTIVITY_STATES)[number];
 
 export type NextChime = {
   time: ChimeSlot;
   tomorrow: boolean;
+};
+
+export type ChimeSound = (typeof CHIME_SOUNDS)[number];
+
+export type Settings = {
+  interval: Interval;
+  activeWindow: ActiveWindow;
+  chimeSound: ChimeSound;
+  vibrate: boolean;
+  activityState: ActivityState;
 };
