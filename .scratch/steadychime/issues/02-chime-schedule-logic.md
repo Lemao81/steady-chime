@@ -1,6 +1,6 @@
 # 02 Chime schedule logic
 
-Status: open
+Status: resolved
 Blocked by: 01
 
 Pure domain logic, no UI and no native APIs, fully unit-tested.

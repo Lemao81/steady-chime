@@ -13,7 +13,7 @@ When the last step of an issue is ticked, set the issue's `Status:` to `resolved
 ## [02 Chime schedule logic](issues/02-chime-schedule-logic.md)
 
 - [x] 2.1 Chime Slots and slot limit
-- [ ] 2.2 Next Chime
+- [x] 2.2 Next Chime
 
 ## [03 App shell](issues/03-app-shell.md)
 

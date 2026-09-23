@@ -8,3 +8,10 @@ export type ActiveWindow = {
 };
 
 export type ChimeSlot = number;
+
+export type ActivityState = 'active' | 'paused';
+
+export type NextChime = {
+  time: ChimeSlot;
+  tomorrow: boolean;
+};

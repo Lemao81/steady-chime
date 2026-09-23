@@ -1,4 +1,4 @@
-import { chimeSlotCount, chimeSlots, exceedsChimeSlotLimit } from './chime-schedule';
+import { chimeSlotCount, chimeSlots, exceedsChimeSlotLimit, nextChime } from './chime-schedule';
 import type { ActiveWindow } from '@/types';
 
 const at = (hours: number): number => hours * 60;
@@ -39,5 +39,34 @@ describe('exceedsChimeSlotLimit', () => {
 
   test('accepts a 15 minute interval across a 14 hour window', () => {
     expect(exceedsChimeSlotLimit(between(8, 22), 15)).toBe(false);
+  });
+});
+
+describe('nextChime', () => {
+  const daytime = chimeSlots(between(8, 22), 180);
+  const overnight = chimeSlots(between(22, 2), 60);
+
+  test('returns the next slot later today', () => {
+    expect(nextChime(daytime, 'active', at(12))).toEqual({ time: at(14), tomorrow: false });
+  });
+
+  test('returns tomorrow\'s first slot after the last slot', () => {
+    expect(nextChime(daytime, 'active', at(21))).toEqual({ time: at(8), tomorrow: true });
+  });
+
+  test('skips a slot that is happening right now', () => {
+    expect(nextChime(daytime, 'active', at(11))).toEqual({ time: at(14), tomorrow: false });
+  });
+
+  test('returns none while paused', () => {
+    expect(nextChime(daytime, 'paused', at(12))).toBeNull();
+  });
+
+  test('returns the midnight slot as tomorrow late in a midnight-crossing window', () => {
+    expect(nextChime(overnight, 'active', at(23) + 30)).toEqual({ time: at(0), tomorrow: true });
+  });
+
+  test('returns a slot later today early in a midnight-crossing window', () => {
+    expect(nextChime(overnight, 'active', 30)).toEqual({ time: at(1), tomorrow: false });
   });
 });
