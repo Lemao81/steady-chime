@@ -34,7 +34,7 @@ pnpm ios              # dev server + open on iOS
 pnpm test             # jest-expo unit tests
 ```
 
-Unit tests are jest-expo; they live in `__tests__` directories and are named `*-test.ts(x)`.
+Unit tests are jest-expo and sit next to the module they cover, as `<module>.test.ts`.
 No linter or formatter is configured — there is nothing to run for those, and `npx tsc --noEmit`
 is the only type check available.
 
@@ -43,16 +43,19 @@ is the only type check available.
 - Entry point is `index.ts` (not `App.tsx`): it calls `registerRootComponent(App)`, which handles
   both Expo Go and native builds. Leave that indirection in place.
 - TypeScript is `strict: true` on top of `expo/tsconfig.base`.
+- App code lives under `src/`, reached through the `@/*` path alias. Pure domain logic — no UI,
+  no native APIs — goes in `src/domain/`.
 - `/ios` and `/android` are gitignored — this is a managed (CNG) project. Native config belongs in
   `app.json` or a config plugin; prebuild output is disposable and must not be committed.
 
 ## Agent Instructions
 
 - Never execute `pnpm install`, `pnpm add`, `pnpm remove`, or any other command that installs/mutates dependencies. Edit `package.json` directly and tell the user to run the install themselves.
+- After creating a file that belongs in the repository, run `git add` on it right away so it is tracked rather than left untracked. This stages the file only; it is not a commit and does not relax the rule below. Leave genuinely disposable files unstaged.
 - Never execute `git commit` on your own without explicit instruction. After explicit instruction, execute without asking for additional confirmation.
 - Commit directly to main — this is a solo project and does not use feature branches. Do not create a branch before committing just because main is the default branch. Committing is still only on instruction.
 - After executing a commit, stop. Never start the next task or planned commit automatically — wait for the user to say so.
-- In this sandbox, `node_modules` was installed on Windows: `pnpm` is unavailable, `.bin` shims fail, and platform-specific binaries (e.g. Biome's Linux CLI) are missing. Never attempt `npx <tool>`, `pnpm exec <tool>`, `pnpm <script>`, or login-shell fallbacks. To verify changes, run `node node_modules/typescript/bin/tsc --noEmit` (ignore pre-existing errors in unrelated files) and skip lint/format checks — the user runs `pnpm check` on the host.
+- In this sandbox, `node_modules` was installed on Windows: `pnpm` is unavailable, `.bin` shims fail, and platform-specific binaries (e.g. Biome's Linux CLI) are missing. Never attempt `npx <tool>`, `pnpm exec <tool>`, `pnpm <script>`, or login-shell fallbacks. To verify changes, run `node node_modules/typescript/bin/tsc --noEmit` (ignore pre-existing errors in unrelated files) and `node node_modules/jest/bin/jest.js` for the unit tests; skip lint/format checks — the user runs `pnpm check` on the host.
 - When the entire user message is `coa`, treat it as the command `commit all`.
 
 ## Code Style
