@@ -1,4 +1,4 @@
-import type { Settings } from '@/types';
+import type { Settings, ThemeColors } from '@/types';
 
 export const MINUTES_PER_DAY = 1440;
 
@@ -18,4 +18,9 @@ export const DEFAULT_SETTINGS: Settings = {
   chimeSound: 'soft-bell',
   vibrate: false,
   activityState: 'paused',
+};
+
+export const THEME_COLORS: Record<'light' | 'dark', ThemeColors> = {
+  light: { background: '#ffffff', text: '#000000' },
+  dark: { background: '#000000', text: '#ffffff' },
 };

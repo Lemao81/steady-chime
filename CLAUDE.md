@@ -6,9 +6,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project state
 
-SteadyChime is a bare Expo SDK 57 / React Native 0.86 / React 19 app, currently still the
-unmodified Expo TypeScript starter (`App.tsx` renders the placeholder screen). There is no
-app-specific architecture yet — when adding structure, establish it rather than looking for it.
+SteadyChime is an Expo SDK 57 / React Native 0.86 / React 19 app built with Expo Router, being
+implemented step by step from the plan in `.scratch/steadychime/`. Structure is still young —
+when adding structure, establish it rather than looking for it.
 
 ## Expo skills
 
@@ -40,8 +40,8 @@ is the only type check available.
 
 ## Conventions
 
-- Entry point is `index.ts` (not `App.tsx`): it calls `registerRootComponent(App)`, which handles
-  both Expo Go and native builds. Leave that indirection in place.
+- Entry point is `expo-router/entry` (`main` in `package.json`); there is no `index.ts` or
+  `App.tsx`. Routes live in `src/app/`, with the root layout in `src/app/_layout.tsx`.
 - TypeScript is `strict: true` on top of `expo/tsconfig.base`.
 - App code lives under `src/`, reached through the `@/*` path alias. Pure domain logic — no UI,
   no native APIs — goes in `src/domain/`.

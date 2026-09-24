@@ -18,7 +18,7 @@ When the last step of an issue is ticked, set the issue's `Status:` to `resolved
 ## [03 App shell](issues/03-app-shell.md)
 
 - [x] 3.1 📦 Settings persistence
-- [ ] 3.2 📦 Tab navigation
+- [x] 3.2 📦 Tab navigation
 - [ ] 3.3 📦 Localization
 
 ## [04 Settings](issues/04-settings.md)

@@ -25,3 +25,8 @@ export type Settings = {
   vibrate: boolean;
   activityState: ActivityState;
 };
+
+export type ThemeColors = {
+  background: string;
+  text: string;
+};
