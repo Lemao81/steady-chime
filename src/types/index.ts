@@ -1,4 +1,4 @@
-import type { ACTIVITY_STATES, CHIME_SOUNDS, INTERVALS } from '@/constants';
+import type { ACTIVITY_STATES, CHIME_SOUNDS, INTERVALS, LANGUAGES } from '@/constants';
 
 export type Interval = (typeof INTERVALS)[number];
 
@@ -29,4 +29,13 @@ export type Settings = {
 export type ThemeColors = {
   background: string;
   text: string;
+};
+
+export type Language = (typeof LANGUAGES)[number];
+
+export type Strings = {
+  tabs: {
+    home: string;
+    settings: string;
+  };
 };

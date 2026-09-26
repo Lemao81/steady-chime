@@ -1,6 +1,6 @@
 # 03 App shell
 
-Status: open
+Status: resolved
 Blocked by: 02
 
 Persistent settings, two-tab navigation and localization, so feature screens have a home.

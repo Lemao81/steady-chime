@@ -19,7 +19,7 @@ When the last step of an issue is ticked, set the issue's `Status:` to `resolved
 
 - [x] 3.1 📦 Settings persistence
 - [x] 3.2 📦 Tab navigation
-- [ ] 3.3 📦 Localization
+- [x] 3.3 📦 Localization
 
 ## [04 Settings](issues/04-settings.md)
 

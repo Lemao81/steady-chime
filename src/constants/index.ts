@@ -1,4 +1,4 @@
-import type { Settings, ThemeColors } from '@/types';
+import type { Language, Settings, ThemeColors } from '@/types';
 
 export const MINUTES_PER_DAY = 1440;
 
@@ -24,3 +24,7 @@ export const THEME_COLORS: Record<'light' | 'dark', ThemeColors> = {
   light: { background: '#ffffff', text: '#000000' },
   dark: { background: '#000000', text: '#ffffff' },
 };
+
+export const LANGUAGES = ['en', 'de'] as const;
+
+export const FALLBACK_LANGUAGE: Language = 'en';
