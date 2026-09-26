@@ -3,15 +3,15 @@ import { ACTIVITY_STATES, CHIME_SOUNDS, DEFAULT_SETTINGS, INTERVALS } from '@/co
 import { exceedsChimeSlotLimit } from '@/domain/chime-schedule';
 import type { ActiveWindow, Settings } from '@/types';
 
-const parseActiveWindow = (value: unknown): ActiveWindow | null => {
+function parseActiveWindow(value: unknown): ActiveWindow | null {
   if (!isRecord(value) || !isTimeOfDay(value.start) || !isTimeOfDay(value.end)) {
     return null;
   }
 
   return { start: value.start, end: value.end };
-};
+}
 
-const readJson = (raw: string | null): unknown => {
+function readJson(raw: string | null): unknown {
   if (raw === null) {
     return null;
   }
@@ -21,9 +21,9 @@ const readJson = (raw: string | null): unknown => {
   } catch {
     return null;
   }
-};
+}
 
-export const parseSettings = (raw: string | null): Settings => {
+export function parseSettings(raw: string | null): Settings {
   const stored = readJson(raw);
 
   if (!isRecord(stored)) {
@@ -43,4 +43,4 @@ export const parseSettings = (raw: string | null): Settings => {
       ? stored.activityState
       : DEFAULT_SETTINGS.activityState,
   };
-};
+}

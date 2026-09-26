@@ -10,21 +10,23 @@ const listeners = new Set<() => void>();
 let current: Settings | null = null;
 let loading: Promise<void> | null = null;
 
-const notify = (): void => {
+function notify(): void {
   listeners.forEach((l) => l());
-};
+}
 
-export const getSettings = (): Settings | null => current;
+export function getSettings(): Settings | null {
+  return current;
+}
 
-export const subscribeToSettings = (listener: () => void): (() => void) => {
+export function subscribeToSettings(listener: () => void): () => void {
   listeners.add(listener);
 
   return () => {
     listeners.delete(listener);
   };
-};
+}
 
-export const loadSettings = (): Promise<void> => {
+export function loadSettings(): Promise<void> {
   loading ??= AsyncStorage.getItem(SETTINGS_KEY)
     .catch(() => null)
     .then((raw) => {
@@ -33,11 +35,11 @@ export const loadSettings = (): Promise<void> => {
     });
 
   return loading;
-};
+}
 
-export const updateSettings = async (changes: Partial<Settings>): Promise<void> => {
+export async function updateSettings(changes: Partial<Settings>): Promise<void> {
   await loadSettings();
   current = { ...DEFAULT_SETTINGS, ...current, ...changes };
   notify();
   await AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(current));
-};
+}

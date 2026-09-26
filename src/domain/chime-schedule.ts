@@ -1,16 +1,19 @@
 import { MAX_CHIME_SLOTS, MINUTES_PER_DAY } from '@/constants';
 import type { ActiveWindow, ActivityState, ChimeSlot, Interval, NextChime } from '@/types';
 
-export const activeWindowLength = (activeWindow: ActiveWindow): number =>
-  (activeWindow.end - activeWindow.start + MINUTES_PER_DAY) % MINUTES_PER_DAY;
+export function activeWindowLength(activeWindow: ActiveWindow): number {
+  return (activeWindow.end - activeWindow.start + MINUTES_PER_DAY) % MINUTES_PER_DAY;
+}
 
-export const chimeSlotCount = (activeWindow: ActiveWindow, interval: Interval): number =>
-  Math.floor(activeWindowLength(activeWindow) / interval) + 1;
+export function chimeSlotCount(activeWindow: ActiveWindow, interval: Interval): number {
+  return Math.floor(activeWindowLength(activeWindow) / interval) + 1;
+}
 
-export const exceedsChimeSlotLimit = (activeWindow: ActiveWindow, interval: Interval): boolean =>
-  chimeSlotCount(activeWindow, interval) > MAX_CHIME_SLOTS;
+export function exceedsChimeSlotLimit(activeWindow: ActiveWindow, interval: Interval): boolean {
+  return chimeSlotCount(activeWindow, interval) > MAX_CHIME_SLOTS;
+}
 
-export const chimeSlots = (activeWindow: ActiveWindow, interval: Interval): ChimeSlot[] => {
+export function chimeSlots(activeWindow: ActiveWindow, interval: Interval): ChimeSlot[] {
   const length = activeWindowLength(activeWindow);
   const slots: ChimeSlot[] = [];
 
@@ -19,9 +22,9 @@ export const chimeSlots = (activeWindow: ActiveWindow, interval: Interval): Chim
   }
 
   return slots;
-};
+}
 
-export const nextChime = (slots: ChimeSlot[], state: ActivityState, now: number): NextChime | null => {
+export function nextChime(slots: ChimeSlot[], state: ActivityState, now: number): NextChime | null {
   if (state === 'paused' || slots.length === 0) {
     return null;
   }
@@ -30,4 +33,4 @@ export const nextChime = (slots: ChimeSlot[], state: ActivityState, now: number)
   const later = ordered.find((s) => s > now);
 
   return later === undefined ? { time: ordered[0], tomorrow: true } : { time: later, tomorrow: false };
-};
+}

@@ -1,12 +1,16 @@
 import { chimeSlotCount, chimeSlots, exceedsChimeSlotLimit, nextChime } from './chime-schedule';
 import type { ActiveWindow } from '@/types';
 
-const at = (hours: number): number => hours * 60;
+function at(hours: number): number {
+  return hours * 60;
+}
 
-const between = (startHour: number, endHour: number): ActiveWindow => ({
-  start: at(startHour),
-  end: at(endHour),
-});
+function between(startHour: number, endHour: number): ActiveWindow {
+  return {
+    start: at(startHour),
+    end: at(endHour),
+  };
+}
 
 describe('chimeSlots', () => {
   test('starts at the window start and repeats every whole interval', () => {

@@ -7,7 +7,7 @@ type SettingsHook = {
   updateSettings: (changes: Partial<Settings>) => Promise<void>;
 };
 
-export const useSettings = (): SettingsHook => {
+export function useSettings(): SettingsHook {
   const settings = useSyncExternalStore(subscribeToSettings, getSettings);
 
   useEffect(() => {
@@ -15,4 +15,4 @@ export const useSettings = (): SettingsHook => {
   }, []);
 
   return { settings, updateSettings };
-};
+}
