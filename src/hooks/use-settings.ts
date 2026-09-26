@@ -11,7 +11,7 @@ export function useSettings(): SettingsHook {
   const settings = useSyncExternalStore(subscribeToSettings, getSettings);
 
   useEffect(() => {
-    loadSettings();
+    void loadSettings();
   }, []);
 
   return { settings, updateSettings };
