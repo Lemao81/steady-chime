@@ -6,6 +6,11 @@ export const MAX_CHIME_SLOTS = 60;
 
 export const ACTIVE_WINDOW_STEP = 15;
 
+export const ACTIVE_WINDOW_TIMES = Array.from(
+  { length: MINUTES_PER_DAY / ACTIVE_WINDOW_STEP },
+  (_, i) => i * ACTIVE_WINDOW_STEP,
+);
+
 export const INTERVALS = [15, 20, 30, 60, 120, 180, 240] as const;
 
 export const CHIME_SOUNDS = ['soft-bell'] as const;

@@ -23,7 +23,7 @@ When the last step of an issue is ticked, set the issue's `Status:` to `resolved
 
 ## [04 Settings](issues/04-settings.md)
 
-- [ ] 4.1 Settings tab
+- [x] 4.1 📦 Settings tab
 - [ ] 4.2 📦 Chime Sounds (Android dev build needed from here on)
 
 ## [05 Chiming](issues/05-chiming.md)

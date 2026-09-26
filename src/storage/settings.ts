@@ -41,5 +41,5 @@ export async function updateSettings(changes: Partial<Settings>): Promise<void> 
   await loadSettings();
   current = { ...DEFAULT_SETTINGS, ...current, ...changes };
   notify();
-  await AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(current));
+  await AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(current)).catch(() => undefined);
 }

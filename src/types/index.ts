@@ -38,4 +38,15 @@ export type Strings = {
     home: string;
     settings: string;
   };
+  settings: {
+    interval: string;
+    activeWindowStart: string;
+    activeWindowEnd: string;
+    vibrate: string;
+    slotLimitExceeded: (maxSlots: number) => string;
+  };
+  units: {
+    minutes: string;
+    hours: string;
+  };
 };
