@@ -1,6 +1,6 @@
 # 04 Settings
 
-Status: open
+Status: resolved
 Blocked by: 03
 
 The Settings tab with every configuration control, including the bundled Chime Sounds.

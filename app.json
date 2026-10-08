@@ -22,7 +22,29 @@
       "predictiveBackGestureEnabled": false
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      [
+        "expo-notifications",
+        {
+          "sounds": [
+            "./assets/sounds/soft_bell.wav",
+            "./assets/sounds/boxing_bell.wav",
+            "./assets/sounds/triangle_chime.wav",
+            "./assets/sounds/jaw_harp.wav",
+            "./assets/sounds/harmonic_guitar.wav",
+            "./assets/sounds/boom_piano.wav"
+          ]
+        }
+      ],
+      [
+        "expo-audio",
+        {
+          "microphonePermission": false,
+          "recordAudioAndroid": false,
+          "enableBackgroundPlayback": false
+        }
+      ],
+      "expo-asset"
     ],
     "experiments": {
       "typedRoutes": true

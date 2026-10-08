@@ -1,10 +1,9 @@
 import { Row, Text } from '@expo/ui';
-import { width } from '@expo/ui/jetpack-compose/modifiers';
+import { defaultMinSize } from '@expo/ui/jetpack-compose/modifiers';
 import { frame } from '@expo/ui/swift-ui/modifiers';
 import type { ReactNode } from 'react';
 import { Platform } from 'react-native';
-
-const LABEL_WIDTH = 120;
+import { SETTING_LABEL_WIDTH } from '@/constants';
 
 type SettingRowProps = {
   label: string;
@@ -13,7 +12,7 @@ type SettingRowProps = {
 
 export function SettingRow({ label, children }: SettingRowProps) {
   const labelModifiers =
-    Platform.OS === 'ios' ? [frame({ width: LABEL_WIDTH, alignment: 'leading' })] : [width(LABEL_WIDTH)];
+    Platform.OS === 'ios' ? [frame({ width: SETTING_LABEL_WIDTH, alignment: 'leading' })] : [defaultMinSize({ minWidth: SETTING_LABEL_WIDTH })];
 
   return (
     <Row alignment="center" spacing={16}>

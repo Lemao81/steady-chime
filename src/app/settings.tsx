@@ -1,10 +1,12 @@
-import { Checkbox, FieldGroup, Host, Picker, Text } from '@expo/ui';
+import { Button, Checkbox, FieldGroup, Host, Picker, Row, Text } from '@expo/ui';
+import { weight } from '@expo/ui/jetpack-compose/modifiers';
 import { useState } from 'react';
 import { Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { SettingRow } from '@/components/SettingRow';
-import { ACTIVE_WINDOW_TIMES, INTERVALS, MAX_CHIME_SLOTS } from '@/constants';
+import { ACTIVE_WINDOW_TIMES, CHIME_SOUNDS, INTERVALS, MAX_CHIME_SLOTS } from '@/constants';
 import { exceedsChimeSlotLimit } from '@/domain/chime-schedule';
+import { useChimeSoundPreview } from '@/hooks/use-chime-sound-preview';
 import { useSettings } from '@/hooks/use-settings';
 import { useStrings } from '@/hooks/use-strings';
 import { useTimeFormat } from '@/hooks/use-time-format';
@@ -15,6 +17,7 @@ export default function SettingsScreen() {
   const { settings, updateSettings } = useSettings();
   const strings = useStrings();
   const formatTime = useTimeFormat();
+  const previewChimeSound = useChimeSoundPreview();
   const [limitExceeded, setLimitExceeded] = useState(false);
 
   if (settings === null) {
@@ -68,6 +71,26 @@ export default function SettingsScreen() {
                 <Text>{strings.settings.slotLimitExceeded(MAX_CHIME_SLOTS)}</Text>
               </FieldGroup.SectionFooter>
             )}
+          </FieldGroup.Section>
+          <FieldGroup.Section>
+            <SettingRow label={strings.settings.chimeSound}>
+              <Row modifiers={Platform.OS === 'android' ? [weight(1)] : undefined}>
+                <Picker
+                  selectedValue={settings.chimeSound}
+                  onValueChange={(s) => void updateSettings({ chimeSound: s })}
+                >
+                  {CHIME_SOUNDS.map((s) => (
+                    <Picker.Item key={s} label={strings.chimeSounds[s]} value={s} />
+                  ))}
+                </Picker>
+              </Row>
+              <Button
+                label="▶"
+                testID="play-chime-sound"
+                variant="text"
+                onPress={() => previewChimeSound(settings.chimeSound)}
+              />
+            </SettingRow>
           </FieldGroup.Section>
           {Platform.OS === 'android' && (
             <FieldGroup.Section>

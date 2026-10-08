@@ -42,9 +42,11 @@ export type Strings = {
     interval: string;
     activeWindowStart: string;
     activeWindowEnd: string;
+    chimeSound: string;
     vibrate: string;
     slotLimitExceeded: (maxSlots: number) => string;
   };
+  chimeSounds: Record<ChimeSound, string>;
   units: {
     minutes: string;
     hours: string;
