@@ -1,62 +1,23 @@
-# CLAUDE.md
-
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
 @AGENTS.md
 
-## Project state
+## General Notes
 
-SteadyChime is an Expo SDK 57 / React Native 0.86 / React 19 app built with Expo Router, being
-implemented step by step from the plan in `.scratch/steadychime/`. Structure is still young —
-when adding structure, establish it rather than looking for it.
+This file is shared across projects. Apart from current project descriptions, any technology it names only defines how to work *if* that technology is used; its mention is not a sign that this project uses it or should. Feature planning should reason from the actual code, its requirements and the decisions made with the user.
 
-## Expo skills
+## Tooling
 
-The bundled `expo:*` skills don't know this project's SDK pin — when a skill's example conflicts
-with the v57 docs, `AGENTS.md` wins. Confirm any API against the versioned docs before using it.
-
-## Package manager
-
-**pnpm** (`pnpm-lock.yaml`). Do not run `npm install` / `yarn` — it will desync the lockfile.
-pnpm is not on `PATH` in this sandbox; use `corepack pnpm <cmd>` or install it first.
-
-`pnpm-workspace.yaml` sets `minimumReleaseAge: 10080` (7 days): pnpm refuses to install any
-package version published less than a week ago. When a dependency resolve fails for this reason,
-pin an older patch version (as commit `fa62a53` did) rather than lowering the threshold.
-
-## Commands
-
-```bash
-pnpm install          # install deps
-pnpm start            # Metro bundler / Expo dev server
-pnpm android          # dev server + open on Android
-pnpm ios              # dev server + open on iOS
-pnpm test             # jest-expo unit tests
-```
-
-Unit tests are jest-expo and sit next to the module they cover, as `<module>.test.ts`.
-No linter or formatter is configured — there is nothing to run for those, and `npx tsc --noEmit`
-is the only type check available.
-
-## Conventions
-
-- Entry point is `expo-router/entry` (`main` in `package.json`); there is no `index.ts` or
-  `App.tsx`. Routes live in `src/app/`, with the root layout in `src/app/_layout.tsx`.
-- TypeScript is `strict: true` on top of `expo/tsconfig.base`.
-- App code lives under `src/`, reached through the `@/*` path alias. Pure domain logic — no UI,
-  no native APIs — goes in `src/domain/`.
-- `/ios` and `/android` are gitignored — this is a managed (CNG) project. Native config belongs in
-  `app.json` or a config plugin; prebuild output is disposable and must not be committed.
+- Use pnpm as frontend package manager (`pnpm-lock.yaml`, `pnpm-workspace.yaml`).
 
 ## Agent Instructions
 
-- Never execute `pnpm install`, `pnpm add`, `pnpm remove`, or any other command that installs/mutates dependencies. Edit `package.json` directly and tell the user to run the install themselves.
-- After creating a file that belongs in the repository, run `git add` on it right away so it is tracked rather than left untracked. This stages the file only; it is not a commit and does not relax the rule below. Leave genuinely disposable files unstaged.
-- Never execute `git commit` on your own without explicit instruction. After explicit instruction, execute without asking for additional confirmation.
-- Commit directly to main — this is a solo project and does not use feature branches. Do not create a branch before committing just because main is the default branch. Committing is still only on instruction.
+- `node_modules` is installed on the Windows host and shared with this sandbox; that install also fetches the Linux native binaries. Never run `pnpm`, `npx`, `electron`, `electron-forge` or any install command here; call tools via `node_modules/.bin/<tool>`. To change dependencies, edit `package.json` and tell the user to run the install.
+- If the project uses Biome: whenever you have edited files it checks, run `biome check --write` before handing back to the user, and fix whatever it still reports in the code; never silence a finding by suppression or by changing `biome.json` without asking.
+- If the project uses shadcn/ui: never write component code yourself; to add or update components, give the user the `pnpm shadcn add <components>` command (with `--overwrite` for updates, naming any local edits it discards, since formatting makes `--diff` useless) and wait until they have run it. Then format the files and stage them by explicit path. Read-only CLI calls (`docs`, `search`, `view`, `--dry-run`) are fine.
+- Never execute `git commit` on your own without explicit instruction. After explicit instruction, commit directly to main — this is a solo project and does not use feature branches.
 - After executing a commit, stop. Never start the next task or planned commit automatically — wait for the user to say so.
-- In this sandbox, `node_modules` was installed on Windows: `pnpm` is unavailable, `.bin` shims fail, and platform-specific binaries (e.g. Biome's Linux CLI) are missing. Never attempt `npx <tool>`, `pnpm exec <tool>`, `pnpm <script>`, or login-shell fallbacks. To verify changes, run `node node_modules/typescript/bin/tsc --noEmit` (ignore pre-existing errors in unrelated files) and `node node_modules/jest/bin/jest.js` for the unit tests; skip lint/format checks — the user runs `pnpm check` on the host.
+- After creating a file that belongs in the repository, run `git add` on it right away so it is tracked rather than left untracked.
 - When the entire user message is `coa`, treat it as the command `commit all`.
+- When the entire user message is `moveon`, treat it as the command "Move on with the plan".
 
 ## Code Style
 - General:
@@ -64,37 +25,35 @@ is the only type check available.
   - Always brace a control-flow body and put its statement on its own line — never `if (x) return`.
   - Never add comments, except tool-control directive comments when explicitly instructed — e.g. suppression/ignore/pragma comments for linters, formatters, type-checkers, or static analyzers.
   - Preserve a file's existing line endings; write new files with CRLF.
-- TypeScript:
-  - Name a React component's file in PascalCase (`UserAvatar.tsx`); name every other file and every folder in kebab-case (`date-format.ts`, `api-client/`). Files and folders whose names define routes under file-based routing are the exception: they follow the router's naming conventions, since renaming them would change the routes (`_layout.tsx`, `index.tsx`, `(tabs)/`, `[id].tsx`, `order-details.tsx`). Bundled sound files in `assets/sounds/` are another exception: they use snake_case (`soft_bell.wav`), because Android bundles them as native resources, whose names allow only lowercase letters, digits and underscores; their sound IDs in code stay kebab-case (`soft-bell`).
-  - Declare named functions, including hooks and React components, with the `function` keyword (`function formatPrice(amount: number): string { … }`), never as an arrow function assigned to a `const`. Arrow functions are for inline callbacks only.
-  - Omit the braces and `return` when an arrow function body is a single expression, except in React components; keep them where the implicit return would change behaviour, such as a `useEffect` callback, or where it would return a value from a `forEach` callback, such as `Map.set` or `Array.push`.
-  - Shorten an inline callback's parameter to the first letter of the last word in its name when the body is a single expression on one line. Keep the full name when the body spans multiple lines, when two parameters would collide on the same letter, when that letter is already bound in scope, or when the parameter is used as a JSX namespace.
-  - Add an explicit return type to every named function, except React components; inline callbacks may rely on inference. Omit it where the annotation would only restate an unspellable inferred type.
-  - When a returned promise is deliberately not awaited because it cannot reject, prefix the call with `void` (`void preloadCache();`) instead of leaving it bare or adding an empty `.catch`. A promise that can reject must be awaited or have its rejection handled.
-  - Use a `type` alias for React component props, never an `interface`.
-  - Always use single quotes, matching the Biome config's `quoteStyle`.
-  - Import a directory's `index` module by the directory alone — `<dir>`, never `<dir>/index`.
-  - Insert an empty line after a multi-line block statement (`if`, `for`, `while`, `do`/`while`, `switch`, `try`/`catch`), unless it is the last statement in its scope. Never insert one before a continuation keyword (`} else {`, `} catch {`, `} finally {`, `} while (…);`).
+- C#:
+  - Tests:
+    - Structure tests with the Arrange-Act-Assert pattern, marking each section with an `// Arrange`, `// Act` or `// Assert` comment.
+- package.json:
+  - Prefix script names with a short tag for the tool it runs, followed by a colon (`bm:check`, `db:migrate`, `docker:up`). Scripts for the core build toolchain and for tests keep plain names (`start`, `typecheck`, `test:e2e`).
+- Markdown:
+  - Never hard-wrap text. Write each paragraph, bullet point or table cell as one line, however long, and leave wrapping to the viewer. Line breaks belong only between separate elements (paragraphs, list items, headings, code blocks).
+- Cypress:
+  - Select elements only via `cy.get('[data-cy=...]')`; add a `data-cy` attribute to every element a test targets.
+  - Keep `it()` titles to a few words naming the main thing, not action→result sentences.
+
+## TypeScript Code Style
+
+Reference `docs/references/typescript-code-style.md` for detailed TypeScript code style guide.
+
+## Starting a feature + Issue tracker
+
+Reference `docs/references/feature-start-issue-tracker.md` for details when starting a feature or working on issues.
 
 ## Agent skills
 
-### Issue tracker
+### Commits
 
-Issues and specs live as local markdown files under `.scratch/<feature>/`. Issues are sized by
-feature; a `plan.md` next to them breaks each issue into single-commit steps as checkboxes, grouped
-under their issue. "Move on with the plan" does exactly one step, ticks it and stops, without
-committing. See `docs/agents/issue-tracker.md`.
+The repo includes a `commit-messages` skill (`.claude/skills/commit-messages/`, tracked in `skills-lock.json`). Use it whenever you commit.
 
-### Domain docs
+## Workflows
 
-Single-context: one root `CONTEXT.md` plus `docs/adr/`. See `docs/agents/domain.md`.
+### Creating/Modifying API endpoints
 
-## Claude Code Status Line
+When adding or changing an API endpoint:
 
-On the first turn of a session, if `~/.claude/settings.json` has no `statusLine` entry, set one up
-without asking — it is pre-approved. Generate a status line command script in `~/.claude/` and
-register it in `settings.json` (merge; keep existing keys). The status line shows only:
-
-- Context usage as a 20-character progress bar using `▓` (used) and `░` (free), followed by the percentage
-- Bar and percentage colored by usage: green below 50%, yellow 50–79%, red 80% and above; the free part of the bar dimmed
-- No padding
+1. Add or update its request in the related project's .http file, with a realistic sample body for POST, PUT and PATCH.
