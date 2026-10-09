@@ -33,6 +33,7 @@ Platforms: iOS and Android, no web. Only Android is tested for now. No accounts,
 - All Chimes stack into one group; text is "SteadyChime · HH:MM".
 - Android: no heads-up banner, only a tray entry.
 - Opening the app clears delivered Chimes.
+- Delivered Chimes don't pile up when the app stays closed: each removes itself shortly after sounding (approach from issue 05 step 3).
 
 ## UI
 
