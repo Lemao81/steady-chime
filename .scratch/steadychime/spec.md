@@ -1,6 +1,6 @@
 # SteadyChime v1 spec
 
-Vocabulary: see `CONTEXT.md`. Decisions: see `docs/adr/`.
+Vocabulary: see `GLOSSARY.md`. Decisions: see `docs/adr/`.
 
 ## Product
 
