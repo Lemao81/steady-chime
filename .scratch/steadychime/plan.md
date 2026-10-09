@@ -28,7 +28,7 @@ When the last step of an issue is ticked, set the issue's `Status:` to `resolved
 
 ## [05 Chiming](issues/05-chiming.md)
 
-- [ ] 5.1 📦 OS scheduling
+- [x] 5.1 📦 OS scheduling
 - [ ] 5.2 Permissions and activation
 
 ## [06 Home](issues/06-home.md)

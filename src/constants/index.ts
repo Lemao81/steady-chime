@@ -1,5 +1,7 @@
 import type { ChimeSound, Language, Settings, ThemeColors } from '@/types';
 
+export const APP_NAME = 'SteadyChime';
+
 export const MINUTES_PER_DAY = 1440;
 
 export const MAX_CHIME_SLOTS = 60;
@@ -30,6 +32,8 @@ export const CHIME_SOUND_FILES: Record<ChimeSound, string> = {
   'harmonic-guitar': 'harmonic_guitar.wav',
   'boom-piano': 'boom_piano.wav',
 };
+
+export const CHIME_VIBRATION_PATTERN = [0, 250, 250, 250];
 
 export const ACTIVITY_STATES = ['active', 'paused'] as const;
 
