@@ -1,8 +1,9 @@
-import { Button, FieldGroup, Host, Icon, Picker, Row, Switch, Text } from '@expo/ui';
+import { Button, FieldGroup, Host, Icon, Row, Switch, Text } from '@expo/ui';
 import { weight } from '@expo/ui/jetpack-compose/modifiers';
 import { useState } from 'react';
 import { Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { SettingPicker } from '@/components/SettingPicker';
 import { SettingRow } from '@/components/SettingRow';
 import { ACTIVE_WINDOW_TIMES, CHIME_SOUNDS, INTERVALS, MAX_CHIME_SLOTS } from '@/constants';
 import { exceedsChimeSlotLimit } from '@/domain/chime-schedule';
@@ -41,7 +42,9 @@ export default function SettingsScreen() {
     }
   }
 
-  const timeItems = ACTIVE_WINDOW_TIMES.map((t) => <Picker.Item key={t} label={formatTime(t)} value={t} />);
+  const intervalOptions = INTERVALS.map((i) => ({ label: formatInterval(i, strings.units), value: i }));
+  const timeOptions = ACTIVE_WINDOW_TIMES.map((t) => ({ label: formatTime(t), value: t }));
+  const chimeSoundOptions = CHIME_SOUNDS.map((s) => ({ label: strings.chimeSounds[s], value: s }));
 
   return (
     <SafeAreaView edges={['top']} style={{ flex: 1 }}>
@@ -49,27 +52,25 @@ export default function SettingsScreen() {
         <FieldGroup>
           <FieldGroup.Section>
             <SettingRow label={strings.settings.interval}>
-              <Picker selectedValue={interval} onValueChange={(i) => changeSchedule(i, activeWindow)}>
-                {INTERVALS.map((i) => (
-                  <Picker.Item key={i} label={formatInterval(i, strings.units)} value={i} />
-                ))}
-              </Picker>
+              <SettingPicker
+                options={intervalOptions}
+                selectedValue={interval}
+                onValueChange={(i) => changeSchedule(i, activeWindow)}
+              />
             </SettingRow>
             <SettingRow label={strings.settings.activeWindowStart}>
-              <Picker
+              <SettingPicker
+                options={timeOptions}
                 selectedValue={activeWindow.start}
                 onValueChange={(s) => changeSchedule(interval, { ...activeWindow, start: s })}
-              >
-                {timeItems}
-              </Picker>
+              />
             </SettingRow>
             <SettingRow label={strings.settings.activeWindowEnd}>
-              <Picker
+              <SettingPicker
+                options={timeOptions}
                 selectedValue={activeWindow.end}
                 onValueChange={(e) => changeSchedule(interval, { ...activeWindow, end: e })}
-              >
-                {timeItems}
-              </Picker>
+              />
             </SettingRow>
             {limitExceeded && (
               <FieldGroup.SectionFooter>
@@ -80,14 +81,11 @@ export default function SettingsScreen() {
           <FieldGroup.Section>
             <SettingRow label={strings.settings.chimeSound}>
               <Row modifiers={Platform.OS === 'android' ? [weight(1)] : undefined}>
-                <Picker
+                <SettingPicker
+                  options={chimeSoundOptions}
                   selectedValue={settings.chimeSound}
                   onValueChange={(s) => void updateSettings({ chimeSound: s })}
-                >
-                  {CHIME_SOUNDS.map((s) => (
-                    <Picker.Item key={s} label={strings.chimeSounds[s]} value={s} />
-                  ))}
-                </Picker>
+                />
               </Row>
               <Button testID="play-chime-sound" variant="text" onPress={() => previewChimeSound(settings.chimeSound)}>
                 <Icon name={PLAY_ICON} accessibilityLabel={strings.settings.playChimeSound} />

@@ -35,6 +35,17 @@ export type Settings = {
   activityState: ActivityState;
 };
 
+export type PickerOption<T extends string | number> = {
+  label: string;
+  value: T;
+};
+
+export type SettingPickerProps<T extends string | number> = {
+  options: readonly PickerOption<T>[];
+  selectedValue: T;
+  onValueChange: (value: T) => void;
+};
+
 export type ThemeColors = {
   background: string;
   text: string;
