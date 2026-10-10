@@ -18,6 +18,7 @@ This file is shared across projects. Apart from current project descriptions, an
 - After creating a file that belongs in the repository, run `git add` on it right away so it is tracked rather than left untracked.
 - When the entire user message is `coa`, treat it as the command `commit all`.
 - When the entire user message is `moveon`, treat it as the command "Move on with the plan".
+- When asked to print your last response to answers (`print last response to answers`), append that response as Markdown to `ANSWERS.md` in the repo root. Start the entry with a line holding the current timestamp (`## YYYY-MM-DD HH:MM`).
 
 ## Code Style
 - General:
