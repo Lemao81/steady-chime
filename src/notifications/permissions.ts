@@ -63,6 +63,6 @@ export function openNotificationSettings(): Promise<void> {
   return Linking.openSettings();
 }
 
-export function openExactAlarmSettings(): void {
-  ExactAlarm?.openExactAlarmSettings();
+export async function openExactAlarmSettings(): Promise<void> {
+  await ExactAlarm?.openExactAlarmSettings();
 }

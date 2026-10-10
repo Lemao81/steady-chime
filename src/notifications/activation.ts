@@ -18,7 +18,7 @@ export async function activate(settings: Settings, strings: Strings): Promise<vo
   await updateSettings({ activityState: 'active' });
 
   if (prompted && !permissions.exactAlarms) {
-    openExactAlarmSettings();
+    void openExactAlarmSettings().catch(() => undefined);
   }
 }
 
