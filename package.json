@@ -6,6 +6,7 @@
     "start": "expo start",
     "android:start": "expo start --android",
     "android:run": "expo run:android",
+    "android:run:release": "expo run:android --variant release",
     "ios:start": "expo start --ios",
     "prebuild:clean": "expo prebuild --clean",
     "test": "jest"
