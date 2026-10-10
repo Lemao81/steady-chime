@@ -47,9 +47,13 @@ Reference `docs/references/feature-start-issue-tracker.md` for details when star
 
 ## Agent skills
 
+### Agent documents
+
+Before editing CLAUDE.md, AGENTS.md, a skill, or a doc one of them points to, load `writing-for-agents`.
+
 ### Commits
 
-The repo includes a `commit-messages` skill (`.claude/skills/commit-messages/`, tracked in `skills-lock.json`). Use it whenever you commit.
+Before committing, load `commit-messages`.
 
 ## Workflows
 
