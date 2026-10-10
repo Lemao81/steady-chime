@@ -1,4 +1,4 @@
-import { Button, Checkbox, FieldGroup, Host, Picker, Row, Text } from '@expo/ui';
+import { Button, FieldGroup, Host, Picker, Row, Switch, Text } from '@expo/ui';
 import { weight } from '@expo/ui/jetpack-compose/modifiers';
 import { useState } from 'react';
 import { Platform } from 'react-native';
@@ -94,7 +94,7 @@ export default function SettingsScreen() {
           </FieldGroup.Section>
           {Platform.OS === 'android' && (
             <FieldGroup.Section>
-              <Checkbox
+              <Switch
                 label={strings.settings.vibrate}
                 value={settings.vibrate}
                 onValueChange={(v) => void updateSettings({ vibrate: v })}
