@@ -1,4 +1,4 @@
-import { Button, FieldGroup, Host, Picker, Row, Switch, Text } from '@expo/ui';
+import { Button, FieldGroup, Host, Icon, Picker, Row, Switch, Text } from '@expo/ui';
 import { weight } from '@expo/ui/jetpack-compose/modifiers';
 import { useState } from 'react';
 import { Platform } from 'react-native';
@@ -12,6 +12,11 @@ import { useStrings } from '@/hooks/use-strings';
 import { useTimeFormat } from '@/hooks/use-time-format';
 import { formatInterval } from '@/localization/interval-format';
 import type { ActiveWindow, Interval } from '@/types';
+
+const PLAY_ICON = Icon.select({
+  ios: 'play.fill',
+  android: import('@expo/material-symbols/play_arrow.xml'),
+});
 
 export default function SettingsScreen() {
   const { settings, updateSettings } = useSettings();
@@ -84,12 +89,9 @@ export default function SettingsScreen() {
                   ))}
                 </Picker>
               </Row>
-              <Button
-                label="▶"
-                testID="play-chime-sound"
-                variant="text"
-                onPress={() => previewChimeSound(settings.chimeSound)}
-              />
+              <Button testID="play-chime-sound" variant="text" onPress={() => previewChimeSound(settings.chimeSound)}>
+                <Icon name={PLAY_ICON} accessibilityLabel={strings.settings.playChimeSound} />
+              </Button>
             </SettingRow>
           </FieldGroup.Section>
           {Platform.OS === 'android' && (

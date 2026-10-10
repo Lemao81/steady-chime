@@ -52,6 +52,7 @@ export type Strings = {
     activeWindowStart: string;
     activeWindowEnd: string;
     chimeSound: string;
+    playChimeSound: string;
     vibrate: string;
     slotLimitExceeded: (maxSlots: number) => string;
   };

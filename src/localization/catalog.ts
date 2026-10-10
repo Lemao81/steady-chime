@@ -8,6 +8,7 @@ export const CATALOG: Record<Language, Strings> = {
       activeWindowStart: 'Active from',
       activeWindowEnd: 'Active until',
       chimeSound: 'Chime Sound',
+      playChimeSound: 'Play Chime Sound',
       vibrate: 'Vibrate',
       slotLimitExceeded: (maxSlots) =>
         `That would be more than ${maxSlots} Chimes a day. Choose a longer Interval or a shorter Active Window.`,
@@ -35,6 +36,7 @@ export const CATALOG: Record<Language, Strings> = {
       activeWindowStart: 'Aktiv ab',
       activeWindowEnd: 'Aktiv bis',
       chimeSound: 'Signalton',
+      playChimeSound: 'Signalton abspielen',
       vibrate: 'Vibrieren',
       slotLimitExceeded: (maxSlots) =>
         `Das wären mehr als ${maxSlots} Signale am Tag. Wähle ein längeres Intervall oder einen kürzeren aktiven Zeitraum.`,
