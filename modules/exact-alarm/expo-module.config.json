@@ -1,0 +1,6 @@
+{
+  "platforms": ["android"],
+  "android": {
+    "modules": ["com.lemao81.steadychime.exactalarm.ExactAlarmModule"]
+  }
+}

@@ -10,7 +10,7 @@ function chimeChannelId(sound: ChimeSound, vibrate: boolean): string {
   return `chime-${sound}${vibrate ? '-vibrate' : ''}`;
 }
 
-async function ensureChimeChannel(settings: Settings, strings: Strings): Promise<string> {
+export async function ensureChimeChannel(settings: Settings, strings: Strings): Promise<string> {
   const channelId = chimeChannelId(settings.chimeSound, settings.vibrate);
   const soundName = strings.chimeSounds[settings.chimeSound];
 

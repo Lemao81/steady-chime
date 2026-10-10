@@ -18,6 +18,15 @@ export type NextChime = {
 
 export type ChimeSound = (typeof CHIME_SOUNDS)[number];
 
+export type NotificationPermission = 'granted' | 'denied' | 'undetermined';
+
+export type ChimePermissions = {
+  notifications: NotificationPermission;
+  exactAlarms: boolean;
+};
+
+export type PermissionNotice = 'notifications-denied' | 'exact-alarms-denied';
+
 export type Settings = {
   interval: Interval;
   activeWindow: ActiveWindow;
@@ -45,6 +54,11 @@ export type Strings = {
     chimeSound: string;
     vibrate: string;
     slotLimitExceeded: (maxSlots: number) => string;
+  };
+  permissions: {
+    notificationsDenied: string;
+    exactAlarmsDenied: string;
+    openSystemSettings: string;
   };
   chimeSounds: Record<ChimeSound, string>;
   units: {

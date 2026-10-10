@@ -12,6 +12,12 @@ export const CATALOG: Record<Language, Strings> = {
       slotLimitExceeded: (maxSlots) =>
         `That would be more than ${maxSlots} Chimes a day. Choose a longer Interval or a shorter Active Window.`,
     },
+    permissions: {
+      notificationsDenied:
+        'Notifications are turned off for SteadyChime, so it stays Paused. Turn them on in the system settings to activate it.',
+      exactAlarmsDenied: 'Chimes may be a few minutes late while “Alarms & reminders” is not allowed for SteadyChime.',
+      openSystemSettings: 'Open settings',
+    },
     chimeSounds: {
       'soft-bell': 'Soft Bell',
       'boxing-bell': 'Boxing Bell',
@@ -32,6 +38,13 @@ export const CATALOG: Record<Language, Strings> = {
       vibrate: 'Vibrieren',
       slotLimitExceeded: (maxSlots) =>
         `Das wären mehr als ${maxSlots} Signale am Tag. Wähle ein längeres Intervall oder einen kürzeren aktiven Zeitraum.`,
+    },
+    permissions: {
+      notificationsDenied:
+        'Benachrichtigungen sind für SteadyChime ausgeschaltet, deshalb bleibt es pausiert. Schalte sie in den Systemeinstellungen ein, um es zu aktivieren.',
+      exactAlarmsDenied:
+        'Signale können ein paar Minuten zu spät kommen, solange „Wecker und Erinnerungen“ für SteadyChime nicht erlaubt ist.',
+      openSystemSettings: 'Einstellungen öffnen',
     },
     chimeSounds: {
       'soft-bell': 'Sanfte Glocke',
