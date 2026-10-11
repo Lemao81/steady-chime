@@ -26,7 +26,9 @@ function publish(response: Notifications.NotificationPermissionsStatus): ChimePe
     exactAlarms: ExactAlarm?.canScheduleExactAlarms() ?? true,
   };
 
-  listeners.forEach((l) => l());
+  for (const listener of listeners) {
+    listener();
+  }
 
   return current;
 }

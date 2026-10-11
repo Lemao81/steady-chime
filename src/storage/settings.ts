@@ -11,7 +11,9 @@ let current: Settings | null = null;
 let loading: Promise<void> | null = null;
 
 function notify(): void {
-  listeners.forEach((l) => l());
+  for (const listener of listeners) {
+    listener();
+  }
 }
 
 export function getSettings(): Settings | null {
