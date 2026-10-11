@@ -1,8 +1,8 @@
-import { NativeModule, requireOptionalNativeModule } from 'expo';
+import { NativeModule, requireOptionalNativeModule } from 'expo'
 
 declare class ExactAlarmModule extends NativeModule {
-  canScheduleExactAlarms(): boolean;
-  openExactAlarmSettings(): Promise<void>;
+  canScheduleExactAlarms(): boolean
+  openExactAlarmSettings(): Promise<void>
 }
 
-export default requireOptionalNativeModule<ExactAlarmModule>('ExactAlarm');
+export default requireOptionalNativeModule<ExactAlarmModule>('ExactAlarm')

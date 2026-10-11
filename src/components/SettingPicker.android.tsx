@@ -5,41 +5,50 @@ import {
   Text,
   TextField,
   type TextFieldRef,
-} from '@expo/ui/jetpack-compose';
-import { menuAnchor, onVisibilityChanged } from '@expo/ui/jetpack-compose/modifiers';
-import { useEffect, useRef, useState } from 'react';
-import type { SettingPickerProps } from '@/types';
+} from '@expo/ui/jetpack-compose'
+import { menuAnchor, onVisibilityChanged } from '@expo/ui/jetpack-compose/modifiers'
+import { useEffect, useRef, useState } from 'react'
+import type { SettingPickerProps } from '@/types'
 
 async function showLabel(textField: TextFieldRef | null, label: string): Promise<void> {
-  await textField?.setText(label);
-  await textField?.setSelection(0, 0);
+  await textField?.setText(label)
+  await textField?.setSelection(0, 0)
 }
 
 // On Android, the universal Picker from @expo/ui renders a multi-line TextField, so a long label makes the field taller.
 // This Compose version exists only to make that field single-line. Delete this file once Picker can pass singleLine
 // through, and SettingPicker.tsx covers Android again.
-export function SettingPicker<T extends string | number>({ options, selectedValue, onValueChange }: SettingPickerProps<T>) {
-  const [expanded, setExpanded] = useState(false);
-  const [visible, setVisible] = useState(false);
-  const textFieldRef = useRef<TextFieldRef>(null);
-  const selectedLabel = options.find((o) => o.value === selectedValue)?.label ?? '';
+export function SettingPicker<T extends string | number>({
+  options,
+  selectedValue,
+  onValueChange,
+}: SettingPickerProps<T>) {
+  const [expanded, setExpanded] = useState(false)
+  const [visible, setVisible] = useState(false)
+  const textFieldRef = useRef<TextFieldRef>(null)
+  const selectedLabel = options.find((o) => o.value === selectedValue)?.label ?? ''
 
   useEffect(() => {
     if (visible) {
-      void showLabel(textFieldRef.current, selectedLabel).catch(() => undefined);
+      void showLabel(textFieldRef.current, selectedLabel).catch(() => undefined)
     }
-  }, [selectedLabel, visible]);
+  }, [selectedLabel, visible])
 
   return (
     <ExposedDropdownMenuBox expanded={expanded} onExpandedChange={setExpanded}>
-      <TextField ref={textFieldRef} readOnly singleLine modifiers={[menuAnchor(), onVisibilityChanged(setVisible)]} />
+      <TextField
+        ref={textFieldRef}
+        readOnly
+        singleLine
+        modifiers={[menuAnchor(), onVisibilityChanged(setVisible)]}
+      />
       <ExposedDropdownMenu expanded={expanded} onDismissRequest={() => setExpanded(false)}>
         {options.map((option) => (
           <DropdownMenuItem
             key={option.value}
             onClick={() => {
-              onValueChange(option.value);
-              setExpanded(false);
+              onValueChange(option.value)
+              setExpanded(false)
             }}
           >
             <DropdownMenuItem.Text>
@@ -49,5 +58,5 @@ export function SettingPicker<T extends string | number>({ options, selectedValu
         ))}
       </ExposedDropdownMenu>
     </ExposedDropdownMenuBox>
-  );
+  )
 }

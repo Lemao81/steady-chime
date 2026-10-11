@@ -1,14 +1,14 @@
-import { StyleSheet, Text, View } from 'react-native';
-import { useThemeColors } from '@/hooks/use-theme-colors';
+import { StyleSheet, Text, View } from 'react-native'
+import { useThemeColors } from '@/hooks/use-theme-colors'
 
 export default function HomeScreen() {
-  const colors = useThemeColors();
+  const colors = useThemeColors()
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <Text style={{ color: colors.text }}>Home</Text>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -17,4 +17,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+})

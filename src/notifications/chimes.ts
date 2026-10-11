@@ -1,18 +1,18 @@
-import * as Notifications from 'expo-notifications';
-import { Platform } from 'react-native';
-import { APP_NAME, CHIME_SOUND_FILES, CHIME_VIBRATION_PATTERN } from '@/constants';
-import { chimeSlots } from '@/domain/chime-schedule';
-import type { ChimeSound, Settings, Strings } from '@/types';
+import * as Notifications from 'expo-notifications'
+import { Platform } from 'react-native'
+import { APP_NAME, CHIME_SOUND_FILES, CHIME_VIBRATION_PATTERN } from '@/constants'
+import { chimeSlots } from '@/domain/chime-schedule'
+import type { ChimeSound, Settings, Strings } from '@/types'
 
-let pending: Promise<void> = Promise.resolve();
+let pending: Promise<void> = Promise.resolve()
 
 function chimeChannelId(sound: ChimeSound, vibrate: boolean): string {
-  return `chime-${sound}${vibrate ? '-vibrate' : ''}`;
+  return `chime-${sound}${vibrate ? '-vibrate' : ''}`
 }
 
 export async function ensureChimeChannel(settings: Settings, strings: Strings): Promise<string> {
-  const channelId = chimeChannelId(settings.chimeSound, settings.vibrate);
-  const soundName = strings.chimeSounds[settings.chimeSound];
+  const channelId = chimeChannelId(settings.chimeSound, settings.vibrate)
+  const soundName = strings.chimeSounds[settings.chimeSound]
 
   await Notifications.setNotificationChannelAsync(channelId, {
     name: settings.vibrate ? `${soundName} · ${strings.settings.vibrate}` : soundName,
@@ -20,20 +20,25 @@ export async function ensureChimeChannel(settings: Settings, strings: Strings): 
     sound: CHIME_SOUND_FILES[settings.chimeSound],
     enableVibrate: settings.vibrate,
     vibrationPattern: settings.vibrate ? CHIME_VIBRATION_PATTERN : null,
-  });
+  })
 
-  return channelId;
+  return channelId
 }
 
-async function applyChimes(settings: Settings, strings: Strings, formatTime: (time: number) => string): Promise<void> {
-  await Notifications.cancelAllScheduledNotificationsAsync();
+async function applyChimes(
+  settings: Settings,
+  strings: Strings,
+  formatTime: (time: number) => string,
+): Promise<void> {
+  await Notifications.cancelAllScheduledNotificationsAsync()
 
   if (settings.activityState === 'paused') {
-    return;
+    return
   }
 
-  const channelId = Platform.OS === 'android' ? await ensureChimeChannel(settings, strings) : undefined;
-  const slots = chimeSlots(settings.activeWindow, settings.interval);
+  const channelId =
+    Platform.OS === 'android' ? await ensureChimeChannel(settings, strings) : undefined
+  const slots = chimeSlots(settings.activeWindow, settings.interval)
 
   await Promise.all(
     slots.map((slot) =>
@@ -51,13 +56,17 @@ async function applyChimes(settings: Settings, strings: Strings, formatTime: (ti
         },
       }),
     ),
-  );
+  )
 }
 
-export function syncChimes(settings: Settings, strings: Strings, formatTime: (time: number) => string): Promise<void> {
-  pending = pending.catch(() => undefined).then(() => applyChimes(settings, strings, formatTime));
+export function syncChimes(
+  settings: Settings,
+  strings: Strings,
+  formatTime: (time: number) => string,
+): Promise<void> {
+  pending = pending.catch(() => undefined).then(() => applyChimes(settings, strings, formatTime))
 
-  return pending;
+  return pending
 }
 
 export function configureForegroundChimes(): void {
@@ -68,9 +77,9 @@ export function configureForegroundChimes(): void {
       shouldShowList: true,
       shouldSetBadge: false,
     }),
-  });
+  })
 }
 
 export function clearDeliveredChimes(): Promise<void> {
-  return Notifications.dismissAllNotificationsAsync();
+  return Notifications.dismissAllNotificationsAsync()
 }

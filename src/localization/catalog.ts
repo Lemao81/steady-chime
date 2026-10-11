@@ -1,4 +1,4 @@
-import type { Language, Strings } from '@/types';
+import type { Language, Strings } from '@/types'
 
 export const CATALOG: Record<Language, Strings> = {
   en: {
@@ -16,7 +16,8 @@ export const CATALOG: Record<Language, Strings> = {
     permissions: {
       notificationsDenied:
         'Notifications are turned off for SteadyChime, so it stays Paused. Turn them on in the system settings to activate it.',
-      exactAlarmsDenied: 'Chimes may be a few minutes late while “Alarms & reminders” is not allowed for SteadyChime.',
+      exactAlarmsDenied:
+        'Chimes may be a few minutes late while “Alarms & reminders” is not allowed for SteadyChime.',
       openSystemSettings: 'Open settings',
     },
     chimeSounds: {
@@ -58,4 +59,4 @@ export const CATALOG: Record<Language, Strings> = {
     },
     units: { minutes: 'Min.', hours: 'Std.' },
   },
-};
+}

@@ -1,70 +1,74 @@
-import * as Notifications from 'expo-notifications';
-import { Linking } from 'react-native';
-import ExactAlarm from '../../modules/exact-alarm/src/ExactAlarmModule';
-import type { ChimePermissions, NotificationPermission } from '@/types';
+import * as Notifications from 'expo-notifications'
+import { Linking } from 'react-native'
+import type { ChimePermissions, NotificationPermission } from '@/types'
+import ExactAlarm from '../../modules/exact-alarm/src/ExactAlarmModule'
 
 type NotificationPermissionPrompt = {
-  permissions: ChimePermissions;
-  prompted: boolean;
-};
+  permissions: ChimePermissions
+  prompted: boolean
+}
 
-const listeners = new Set<() => void>();
+const listeners = new Set<() => void>()
 
-let current: ChimePermissions | null = null;
+let current: ChimePermissions | null = null
 
-function toNotificationPermission(response: Notifications.NotificationPermissionsStatus): NotificationPermission {
+function toNotificationPermission(
+  response: Notifications.NotificationPermissionsStatus,
+): NotificationPermission {
   if (response.granted) {
-    return 'granted';
+    return 'granted'
   }
 
-  return response.status === Notifications.PermissionStatus.UNDETERMINED ? 'undetermined' : 'denied';
+  return response.status === Notifications.PermissionStatus.UNDETERMINED ? 'undetermined' : 'denied'
 }
 
 function publish(response: Notifications.NotificationPermissionsStatus): ChimePermissions {
   current = {
     notifications: toNotificationPermission(response),
     exactAlarms: ExactAlarm?.canScheduleExactAlarms() ?? true,
-  };
-
-  for (const listener of listeners) {
-    listener();
   }
 
-  return current;
+  for (const listener of listeners) {
+    listener()
+  }
+
+  return current
 }
 
 export function getPermissions(): ChimePermissions | null {
-  return current;
+  return current
 }
 
 export function subscribeToPermissions(listener: () => void): () => void {
-  listeners.add(listener);
+  listeners.add(listener)
 
   return () => {
-    listeners.delete(listener);
-  };
+    listeners.delete(listener)
+  }
 }
 
 export async function refreshPermissions(): Promise<ChimePermissions> {
-  return publish(await Notifications.getPermissionsAsync());
+  return publish(await Notifications.getPermissionsAsync())
 }
 
 export async function promptForNotificationPermission(): Promise<NotificationPermissionPrompt> {
-  const response = await Notifications.getPermissionsAsync();
+  const response = await Notifications.getPermissionsAsync()
 
   if (response.granted || !response.canAskAgain) {
-    return { permissions: publish(response), prompted: false };
+    return { permissions: publish(response), prompted: false }
   }
 
-  const answer = await Notifications.requestPermissionsAsync({ ios: { allowAlert: true, allowSound: true } });
+  const answer = await Notifications.requestPermissionsAsync({
+    ios: { allowAlert: true, allowSound: true },
+  })
 
-  return { permissions: publish(answer), prompted: true };
+  return { permissions: publish(answer), prompted: true }
 }
 
 export function openNotificationSettings(): Promise<void> {
-  return Linking.openSettings();
+  return Linking.openSettings()
 }
 
 export async function openExactAlarmSettings(): Promise<void> {
-  await ExactAlarm?.openExactAlarmSettings();
+  await ExactAlarm?.openExactAlarmSettings()
 }

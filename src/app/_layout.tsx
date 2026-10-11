@@ -1,11 +1,11 @@
-import { NativeTabs } from 'expo-router/unstable-native-tabs';
-import { StatusBar } from 'expo-status-bar';
-import { useChimeScheduling } from '@/hooks/use-chime-scheduling';
-import { useStrings } from '@/hooks/use-strings';
+import { NativeTabs } from 'expo-router/unstable-native-tabs'
+import { StatusBar } from 'expo-status-bar'
+import { useChimeScheduling } from '@/hooks/use-chime-scheduling'
+import { useStrings } from '@/hooks/use-strings'
 
 export default function RootLayout() {
-  const strings = useStrings();
-  useChimeScheduling();
+  const strings = useStrings()
+  useChimeScheduling()
 
   return (
     <>
@@ -16,10 +16,13 @@ export default function RootLayout() {
         </NativeTabs.Trigger>
         <NativeTabs.Trigger name="settings">
           <NativeTabs.Trigger.Label>{strings.tabs.settings}</NativeTabs.Trigger.Label>
-          <NativeTabs.Trigger.Icon sf={{ default: 'gearshape', selected: 'gearshape.fill' }} md="settings" />
+          <NativeTabs.Trigger.Icon
+            sf={{ default: 'gearshape', selected: 'gearshape.fill' }}
+            md="settings"
+          />
         </NativeTabs.Trigger>
       </NativeTabs>
       <StatusBar style="auto" />
     </>
-  );
+  )
 }

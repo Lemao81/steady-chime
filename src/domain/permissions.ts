@@ -1,13 +1,16 @@
-import type { ActivityState, ChimePermissions, PermissionNotice } from '@/types';
+import type { ActivityState, ChimePermissions, PermissionNotice } from '@/types'
 
-export function permissionNotice(activityState: ActivityState, permissions: ChimePermissions): PermissionNotice | null {
+export function permissionNotice(
+  activityState: ActivityState,
+  permissions: ChimePermissions,
+): PermissionNotice | null {
   if (permissions.notifications === 'denied') {
-    return 'notifications-denied';
+    return 'notifications-denied'
   }
 
   if (activityState === 'active' && !permissions.exactAlarms) {
-    return 'exact-alarms-denied';
+    return 'exact-alarms-denied'
   }
 
-  return null;
+  return null
 }

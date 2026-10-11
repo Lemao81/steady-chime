@@ -1,50 +1,53 @@
-import { Button, FieldGroup, Host, Icon, Row, Switch, Text } from '@expo/ui';
-import { weight } from '@expo/ui/jetpack-compose/modifiers';
-import { useState } from 'react';
-import { Platform } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { SettingPicker } from '@/components/SettingPicker';
-import { SettingRow } from '@/components/SettingRow';
-import { ACTIVE_WINDOW_TIMES, CHIME_SOUNDS, INTERVALS, MAX_CHIME_SLOTS } from '@/constants';
-import { exceedsChimeSlotLimit } from '@/domain/chime-schedule';
-import { useChimeSoundPreview } from '@/hooks/use-chime-sound-preview';
-import { useSettings } from '@/hooks/use-settings';
-import { useStrings } from '@/hooks/use-strings';
-import { useTimeFormat } from '@/hooks/use-time-format';
-import { formatInterval } from '@/localization/interval-format';
-import type { ActiveWindow, Interval } from '@/types';
+import { Button, FieldGroup, Host, Icon, Row, Switch, Text } from '@expo/ui'
+import { weight } from '@expo/ui/jetpack-compose/modifiers'
+import { useState } from 'react'
+import { Platform } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { SettingPicker } from '@/components/SettingPicker'
+import { SettingRow } from '@/components/SettingRow'
+import { ACTIVE_WINDOW_TIMES, CHIME_SOUNDS, INTERVALS, MAX_CHIME_SLOTS } from '@/constants'
+import { exceedsChimeSlotLimit } from '@/domain/chime-schedule'
+import { useChimeSoundPreview } from '@/hooks/use-chime-sound-preview'
+import { useSettings } from '@/hooks/use-settings'
+import { useStrings } from '@/hooks/use-strings'
+import { useTimeFormat } from '@/hooks/use-time-format'
+import { formatInterval } from '@/localization/interval-format'
+import type { ActiveWindow, Interval } from '@/types'
 
 const PLAY_ICON = Icon.select({
   ios: 'play.fill',
   android: import('@expo/material-symbols/play_arrow.xml'),
-});
+})
 
 export default function SettingsScreen() {
-  const { settings, updateSettings } = useSettings();
-  const strings = useStrings();
-  const formatTime = useTimeFormat();
-  const previewChimeSound = useChimeSoundPreview();
-  const [limitExceeded, setLimitExceeded] = useState(false);
+  const { settings, updateSettings } = useSettings()
+  const strings = useStrings()
+  const formatTime = useTimeFormat()
+  const previewChimeSound = useChimeSoundPreview()
+  const [limitExceeded, setLimitExceeded] = useState(false)
 
   if (settings === null) {
-    return null;
+    return null
   }
 
-  const { interval, activeWindow } = settings;
+  const { interval, activeWindow } = settings
 
   function changeSchedule(nextInterval: Interval, nextActiveWindow: ActiveWindow): void {
-    const exceeds = exceedsChimeSlotLimit(nextActiveWindow, nextInterval);
+    const exceeds = exceedsChimeSlotLimit(nextActiveWindow, nextInterval)
 
-    setLimitExceeded(exceeds);
+    setLimitExceeded(exceeds)
 
     if (!exceeds) {
-      void updateSettings({ interval: nextInterval, activeWindow: nextActiveWindow });
+      void updateSettings({ interval: nextInterval, activeWindow: nextActiveWindow })
     }
   }
 
-  const intervalOptions = INTERVALS.map((i) => ({ label: formatInterval(i, strings.units), value: i }));
-  const timeOptions = ACTIVE_WINDOW_TIMES.map((t) => ({ label: formatTime(t), value: t }));
-  const chimeSoundOptions = CHIME_SOUNDS.map((s) => ({ label: strings.chimeSounds[s], value: s }));
+  const intervalOptions = INTERVALS.map((i) => ({
+    label: formatInterval(i, strings.units),
+    value: i,
+  }))
+  const timeOptions = ACTIVE_WINDOW_TIMES.map((t) => ({ label: formatTime(t), value: t }))
+  const chimeSoundOptions = CHIME_SOUNDS.map((s) => ({ label: strings.chimeSounds[s], value: s }))
 
   return (
     <SafeAreaView edges={['top']} style={{ flex: 1 }}>
@@ -87,7 +90,11 @@ export default function SettingsScreen() {
                   onValueChange={(s) => void updateSettings({ chimeSound: s })}
                 />
               </Row>
-              <Button testID="play-chime-sound" variant="text" onPress={() => previewChimeSound(settings.chimeSound)}>
+              <Button
+                testID="play-chime-sound"
+                variant="text"
+                onPress={() => previewChimeSound(settings.chimeSound)}
+              >
                 <Icon name={PLAY_ICON} accessibilityLabel={strings.settings.playChimeSound} />
               </Button>
             </SettingRow>
@@ -104,5 +111,5 @@ export default function SettingsScreen() {
         </FieldGroup>
       </Host>
     </SafeAreaView>
-  );
+  )
 }

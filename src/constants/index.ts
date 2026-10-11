@@ -1,19 +1,19 @@
-import type { ChimeSound, Language, Settings, ThemeColors } from '@/types';
+import type { ChimeSound, Language, Settings, ThemeColors } from '@/types'
 
-export const APP_NAME = 'SteadyChime';
+export const APP_NAME = 'SteadyChime'
 
-export const MINUTES_PER_DAY = 1440;
+export const MINUTES_PER_DAY = 1440
 
-export const MAX_CHIME_SLOTS = 60;
+export const MAX_CHIME_SLOTS = 60
 
-export const ACTIVE_WINDOW_STEP = 15;
+export const ACTIVE_WINDOW_STEP = 15
 
 export const ACTIVE_WINDOW_TIMES = Array.from(
   { length: MINUTES_PER_DAY / ACTIVE_WINDOW_STEP },
   (_, i) => i * ACTIVE_WINDOW_STEP,
-);
+)
 
-export const INTERVALS = [15, 20, 30, 60, 120, 180, 240] as const;
+export const INTERVALS = [15, 20, 30, 60, 120, 180, 240] as const
 
 export const CHIME_SOUNDS = [
   'soft-bell',
@@ -22,7 +22,7 @@ export const CHIME_SOUNDS = [
   'jaw-harp',
   'harmonic-guitar',
   'boom-piano',
-] as const;
+] as const
 
 export const CHIME_SOUND_FILES: Record<ChimeSound, string> = {
   'soft-bell': 'soft_bell.wav',
@@ -31,11 +31,11 @@ export const CHIME_SOUND_FILES: Record<ChimeSound, string> = {
   'jaw-harp': 'jaw_harp.wav',
   'harmonic-guitar': 'harmonic_guitar.wav',
   'boom-piano': 'boom_piano.wav',
-};
+}
 
-export const CHIME_VIBRATION_PATTERN = [0, 250, 250, 250];
+export const CHIME_VIBRATION_PATTERN = [0, 250, 250, 250]
 
-export const ACTIVITY_STATES = ['active', 'paused'] as const;
+export const ACTIVITY_STATES = ['active', 'paused'] as const
 
 export const DEFAULT_SETTINGS: Settings = {
   interval: 30,
@@ -43,15 +43,15 @@ export const DEFAULT_SETTINGS: Settings = {
   chimeSound: 'soft-bell',
   vibrate: false,
   activityState: 'paused',
-};
+}
 
 export const THEME_COLORS: Record<'light' | 'dark', ThemeColors> = {
   light: { background: '#ffffff', text: '#000000' },
   dark: { background: '#000000', text: '#ffffff' },
-};
+}
 
-export const LANGUAGES = ['en', 'de'] as const;
+export const LANGUAGES = ['en', 'de'] as const
 
-export const FALLBACK_LANGUAGE: Language = 'en';
+export const FALLBACK_LANGUAGE: Language = 'en'
 
-export const SETTING_LABEL_WIDTH = 120;
+export const SETTING_LABEL_WIDTH = 120
