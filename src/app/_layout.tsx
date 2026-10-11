@@ -1,9 +1,10 @@
 import { NativeTabs } from 'expo-router/unstable-native-tabs'
 import { StatusBar } from 'expo-status-bar'
+import type { JSX } from 'react'
 import { useChimeScheduling } from '@/hooks/use-chime-scheduling'
 import { useStrings } from '@/hooks/use-strings'
 
-export default function RootLayout() {
+export default function RootLayout(): JSX.Element {
   const strings = useStrings()
   useChimeScheduling()
 

@@ -1,7 +1,8 @@
+import type { JSX } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { useThemeColors } from '@/hooks/use-theme-colors'
 
-export default function HomeScreen() {
+export default function HomeScreen(): JSX.Element {
   const colors = useThemeColors()
 
   return (

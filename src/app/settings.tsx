@@ -1,6 +1,6 @@
 import { Button, FieldGroup, Host, Icon, Row, Switch, Text } from '@expo/ui'
 import { weight } from '@expo/ui/jetpack-compose/modifiers'
-import { useState } from 'react'
+import { type JSX, useState } from 'react'
 import { Platform } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { SettingPicker } from '@/components/SettingPicker'
@@ -19,7 +19,7 @@ const PLAY_ICON = Icon.select({
   android: import('@expo/material-symbols/play_arrow.xml'),
 })
 
-export default function SettingsScreen() {
+export default function SettingsScreen(): JSX.Element | null {
   const { settings, updateSettings } = useSettings()
   const strings = useStrings()
   const formatTime = useTimeFormat()
@@ -46,6 +46,7 @@ export default function SettingsScreen() {
     label: formatInterval(i, strings.units),
     value: i,
   }))
+
   const timeOptions = ACTIVE_WINDOW_TIMES.map((t) => ({ label: formatTime(t), value: t }))
   const chimeSoundOptions = CHIME_SOUNDS.map((s) => ({ label: strings.chimeSounds[s], value: s }))
 

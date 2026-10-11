@@ -38,6 +38,7 @@ async function applyChimes(
 
   const channelId =
     Platform.OS === 'android' ? await ensureChimeChannel(settings, strings) : undefined
+
   const slots = chimeSlots(settings.activeWindow, settings.interval)
 
   await Promise.all(

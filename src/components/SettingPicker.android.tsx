@@ -7,7 +7,7 @@ import {
   type TextFieldRef,
 } from '@expo/ui/jetpack-compose'
 import { menuAnchor, onVisibilityChanged } from '@expo/ui/jetpack-compose/modifiers'
-import { useEffect, useRef, useState } from 'react'
+import { type JSX, useEffect, useRef, useState } from 'react'
 import type { SettingPickerProps } from '@/types'
 
 async function showLabel(textField: TextFieldRef | null, label: string): Promise<void> {
@@ -22,7 +22,7 @@ export function SettingPicker<T extends string | number>({
   options,
   selectedValue,
   onValueChange,
-}: SettingPickerProps<T>) {
+}: SettingPickerProps<T>): JSX.Element {
   const [expanded, setExpanded] = useState(false)
   const [visible, setVisible] = useState(false)
   const textFieldRef = useRef<TextFieldRef>(null)
