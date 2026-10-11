@@ -1,3 +1,4 @@
+import { describe, expect, test } from 'vitest';
 import { formatTime } from './time-format';
 
 function at(hours: number, minutes = 0): number {

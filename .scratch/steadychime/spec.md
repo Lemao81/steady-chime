@@ -45,7 +45,7 @@ Expo Router with native tabs.
 
 ## Testing
 
-- jest-expo unit tests for Chime Slot calculation, the slot limit and Next Chime.
+- Vitest unit tests for Chime Slot calculation, the slot limit and Next Chime.
 - Maestro E2E flows (ADR 0002), run locally on the Windows host with an Android emulator; EAS Workflows later.
 - Development-only helpers, absent from release builds: a scheduled-slot readout and a "Chime in 10 s" action.
 

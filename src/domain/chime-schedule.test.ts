@@ -1,3 +1,4 @@
+import { describe, expect, test } from 'vitest';
 import { chimeSlotCount, chimeSlots, exceedsChimeSlotLimit, nextChime } from './chime-schedule';
 import type { ActiveWindow } from '@/types';
 

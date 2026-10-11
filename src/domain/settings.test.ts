@@ -1,3 +1,4 @@
+import { describe, expect, test } from 'vitest';
 import { parseSettings } from './settings';
 import { DEFAULT_SETTINGS } from '@/constants';
 import type { Settings } from '@/types';

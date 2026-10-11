@@ -1,3 +1,4 @@
+import { describe, expect, test } from 'vitest';
 import { formatInterval } from './interval-format';
 
 const units = { minutes: 'min', hours: 'h' };

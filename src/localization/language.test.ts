@@ -1,3 +1,4 @@
+import { describe, expect, test } from 'vitest';
 import { resolveLanguage } from './language';
 
 describe('resolveLanguage', () => {
