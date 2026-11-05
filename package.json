@@ -3,15 +3,17 @@
   "version": "1.0.0",
   "main": "expo-router/entry",
   "scripts": {
-    "prepare": "git config core.hooksPath .githooks",
     "start": "expo start",
     "android:start": "expo start --android",
     "android:run": "expo run:android",
     "android:run:release": "expo run:android --variant release",
     "ios:start": "expo start --ios",
     "prebuild:clean": "expo prebuild --clean",
+    "prepare": "git config core.hooksPath .githooks",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
+    "es:lint": "eslint .",
+    "es:fix": "eslint . --fix",
     "bm:check:ci": "biome ci",
     "bm:check:dev": "biome check",
     "bm:fix": "biome check --write"
