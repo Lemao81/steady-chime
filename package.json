@@ -16,6 +16,16 @@
     "bm:check:dev": "biome check",
     "bm:fix": "biome check --write"
   },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "24.21.0"
+    },
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.10.1"
+    }
+  },
   "dependencies": {
     "@expo/material-symbols": "0.1.1",
     "@expo/ui": "57.0.22",
