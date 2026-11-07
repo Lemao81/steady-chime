@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "main": "expo-router/entry",
   "scripts": {
-    "start": "expo start",
-    "android:start": "expo start --android",
     "android:run": "expo run:android",
     "android:run:release": "expo run:android --variant release",
+    "android:start": "expo start --android",
     "ios:start": "expo start --ios",
+    "start": "expo start",
     "prebuild:clean": "expo prebuild --clean",
     "prepare": "git config core.hooksPath .githooks",
     "test": "vitest run",
