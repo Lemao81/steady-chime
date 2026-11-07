@@ -10,7 +10,7 @@ the content stays pinned to this project's SDK even after SDK 58 ships. Non-SDK 
 
 # Expo skills
 
-- Working in `modules/` → load `expo:expo-module` first.
+- Working in `modules/` → load `expo:expo-module` and read `docs/references/expo-native-modules.md` first.
 - Working on screens or components (`src/app`, `src/components`) → load `expo:expo-ui` and `expo:expo-native-ui` first.
 
 The bundled `expo:*` skills don't know this project's SDK pin — when a skill's example conflicts
