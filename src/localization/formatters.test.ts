@@ -1,8 +1,14 @@
 import { describe, expect, test } from 'vitest'
-import { formatInterval, formatTime } from './formatters'
+import { DEFAULT_SETTINGS } from '@/constants'
+import { CATALOG } from './catalog'
+import { formatInterval, formatSummary, formatTime } from './formatters'
 
 function at(hours: number, minutes = 0): number {
   return hours * 60 + minutes
+}
+
+function format24h(time: number): string {
+  return formatTime(time, true)
 }
 
 describe('formatTime in 24 h', () => {
@@ -47,5 +53,25 @@ describe('formatInterval', () => {
   test('shows whole-hour Intervals in hours', () => {
     expect(formatInterval(60, units)).toBe('1 h')
     expect(formatInterval(240, units)).toBe('4 h')
+  })
+})
+
+describe('formatSummary', () => {
+  test('joins Interval, Active Window and Chime Sound', () => {
+    expect(formatSummary(DEFAULT_SETTINGS, CATALOG.en, format24h)).toBe(
+      'Every 30 min · 08:00–22:00 · Soft Bell',
+    )
+  })
+
+  test('uses the language of the catalog', () => {
+    const settings = {
+      ...DEFAULT_SETTINGS,
+      interval: 120 as const,
+      chimeSound: 'jaw-harp' as const,
+    }
+
+    expect(formatSummary(settings, CATALOG.de, format24h)).toBe(
+      'Alle 2 Std. · 08:00–22:00 · Maulharfe',
+    )
   })
 })

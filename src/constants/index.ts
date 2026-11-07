@@ -1,4 +1,4 @@
-import type { ChimeSound, Language, Settings, ThemeColors } from '@/types'
+import type { ChimeSound, Language, Settings } from '@/types'
 
 export const APP_NAME = 'SteadyChime'
 
@@ -45,11 +45,6 @@ export const DEFAULT_SETTINGS: Settings = {
   chimeSound: 'soft-bell',
   vibrate: false,
   activityState: 'paused',
-}
-
-export const THEME_COLORS: Record<'light' | 'dark', ThemeColors> = {
-  light: { background: '#ffffff', text: '#000000' },
-  dark: { background: '#000000', text: '#ffffff' },
 }
 
 export const LANGUAGES = ['en', 'de'] as const

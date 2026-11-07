@@ -1,6 +1,6 @@
 # 06 Home
 
-Status: open
+Status: resolved
 Blocked by: 05
 
 ## Steps
@@ -10,6 +10,7 @@ Blocked by: 05
 ## Open decisions (ask the user before starting)
 
 - Screen titles: the tabs have no header, so Settings starts below the status bar via `SafeAreaView` and has no title, unlike native settings screens. Give each tab a `Stack` layout with a native title (iOS large title, Android top app bar), replacing the `SafeAreaView` workaround? Load `expo:expo-router` for it.
+  - **Answer (2026-11-07):** yes, as part of step 1: each tab becomes a folder with a `Stack` layout and a localized native title, and the `SafeAreaView` workaround in Settings goes away.
 
 ## Acceptance
 

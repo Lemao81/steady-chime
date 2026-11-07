@@ -46,17 +46,20 @@ export type SettingPickerProps<T extends string | number> = {
   onValueChange: (value: T) => void
 }
 
-export type ThemeColors = {
-  background: string
-  text: string
-}
-
 export type Language = (typeof LANGUAGES)[number]
 
 export type Strings = {
   tabs: {
     home: string
     settings: string
+  }
+  home: {
+    nextChime: string
+    noNextChime: string
+    tomorrow: string
+    activate: string
+    pause: string
+    summary: (interval: string, activeWindow: string, chimeSound: string) => string
   }
   settings: {
     interval: string

@@ -3,6 +3,15 @@ import type { Language, Strings } from '@/types'
 export const CATALOG: Record<Language, Strings> = {
   en: {
     tabs: { home: 'Home', settings: 'Settings' },
+    home: {
+      nextChime: 'Next Chime',
+      noNextChime: '—',
+      tomorrow: 'tomorrow',
+      activate: 'Activate',
+      pause: 'Pause',
+      summary: (interval, activeWindow, chimeSound) =>
+        `Every ${interval} · ${activeWindow} · ${chimeSound}`,
+    },
     settings: {
       interval: 'Interval',
       activeWindowStart: 'Active from',
@@ -32,6 +41,15 @@ export const CATALOG: Record<Language, Strings> = {
   },
   de: {
     tabs: { home: 'Start', settings: 'Einstellungen' },
+    home: {
+      nextChime: 'Nächstes Signal',
+      noNextChime: '—',
+      tomorrow: 'morgen',
+      activate: 'Aktivieren',
+      pause: 'Pausieren',
+      summary: (interval, activeWindow, chimeSound) =>
+        `Alle ${interval} · ${activeWindow} · ${chimeSound}`,
+    },
     settings: {
       interval: 'Intervall',
       activeWindowStart: 'Aktiv ab',

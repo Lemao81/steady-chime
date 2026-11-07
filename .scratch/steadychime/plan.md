@@ -35,7 +35,7 @@ When the last step of an issue is ticked, set the issue's `Status:` to `resolved
 
 ## [06 Home](issues/06-home.md)
 
-- [ ] 6.1 Home tab
+- [x] 6.1 Home tab
 
 ## [07 Verification](issues/07-verification.md)
 
