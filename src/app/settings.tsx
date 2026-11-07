@@ -11,7 +11,7 @@ import { useChimeSoundPreview } from '@/hooks/use-chime-sound-preview'
 import { useSettings } from '@/hooks/use-settings'
 import { useStrings } from '@/hooks/use-strings'
 import { useTimeFormat } from '@/hooks/use-time-format'
-import { formatInterval } from '@/localization/interval-format'
+import { formatInterval } from '@/localization/formatters'
 import type { ActiveWindow, Interval } from '@/types'
 
 const PLAY_ICON = Icon.select({

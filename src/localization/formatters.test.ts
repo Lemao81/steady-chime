@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import { formatTime } from './time-format'
+import { formatInterval, formatTime } from './formatters'
 
 function at(hours: number, minutes = 0): number {
   return hours * 60 + minutes
@@ -34,5 +34,18 @@ describe('formatTime in 12 h', () => {
 
   test('shows noon as 12 PM', () => {
     expect(formatTime(at(12), false)).toBe('12:00 PM')
+  })
+})
+
+describe('formatInterval', () => {
+  const units = { minutes: 'min', hours: 'h' }
+
+  test('shows Intervals under an hour in minutes', () => {
+    expect(formatInterval(20, units)).toBe('20 min')
+  })
+
+  test('shows whole-hour Intervals in hours', () => {
+    expect(formatInterval(60, units)).toBe('1 h')
+    expect(formatInterval(240, units)).toBe('4 h')
   })
 })
