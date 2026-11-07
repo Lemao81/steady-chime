@@ -35,6 +35,8 @@ export const CHIME_SOUND_FILES: Record<ChimeSound, string> = {
 
 export const CHIME_VIBRATION_PATTERN = [0, 250, 250, 250]
 
+export const CHIME_TIMEOUT_MS = 60_000
+
 export const ACTIVITY_STATES = ['active', 'paused'] as const
 
 export const DEFAULT_SETTINGS: Settings = {

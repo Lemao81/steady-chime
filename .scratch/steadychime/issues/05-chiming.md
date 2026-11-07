@@ -1,6 +1,6 @@
 # 05 Chiming
 
-Status: open
+Status: resolved
 Blocked by: 04
 
 Chimes actually sound: hand the Chime Slots to the OS (ADR 0001) and guard it with permissions.
@@ -21,7 +21,8 @@ Chimes actually sound: hand the Chime Slots to the OS (ADR 0001) and guard it wi
 
 ## Notes
 
-- From step 2 on, the app contains native code in `modules/exact-alarm`; changing it needs a new Android dev build.
+- From step 2 on, the app contains native code in `modules/exact-alarm`, and from step 4 on in `modules/chime-tray`; changing either needs a new Android dev build.
+- `modules/chime-tray` has no JS API: its manifest receiver replaces expo-notifications' own `NotificationsService` (priority -1). Alarms armed by a dev build from before step 4 target the old receiver and escape `cancelAll` until they fire once; reinstall the dev build to start clean.
 - The exact-alarm settings screen opens only after the activation that showed the notification prompt, so it is asked for once; afterwards the hint remains.
 - Step 2 provides the activation flow, the permission re-check and the hint texts; the Home tab (issue 06) shows the Active/Paused button and the hints.
 - Granting or revoking exact alarms reschedules all Chimes, since `expo-notifications` picks exact or inexact alarms at scheduling time and Android cancels exact alarms on revocation.

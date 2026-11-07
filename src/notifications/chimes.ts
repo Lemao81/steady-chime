@@ -1,6 +1,6 @@
 import * as Notifications from 'expo-notifications'
 import { Platform } from 'react-native'
-import { APP_NAME, CHIME_SOUND_FILES, CHIME_VIBRATION_PATTERN } from '@/constants'
+import { APP_NAME, CHIME_SOUND_FILES, CHIME_TIMEOUT_MS, CHIME_VIBRATION_PATTERN } from '@/constants'
 import { chimeSlots } from '@/domain/chime-schedule'
 import type { ChimeSound, Settings, Strings } from '@/types'
 
@@ -48,6 +48,7 @@ async function applyChimes(
         content: {
           title: `${APP_NAME} · ${formatTime(slot)}`,
           sound: CHIME_SOUND_FILES[settings.chimeSound],
+          data: { timeoutAfterMs: CHIME_TIMEOUT_MS },
         },
         trigger: {
           type: Notifications.SchedulableTriggerInputTypes.DAILY,

@@ -1,0 +1,28 @@
+plugins {
+  id 'com.android.library'
+  id 'expo-module-gradle-plugin'
+}
+
+group = 'com.lemao81.steadychime'
+version = '1.0.0'
+
+android {
+  namespace "com.lemao81.steadychime.chimetray"
+  defaultConfig {
+    versionCode 1
+    versionName "1.0.0"
+  }
+}
+
+def expoNotificationsVersion = new groovy.json.JsonSlurper().parse(
+  new File(
+    providers.exec {
+      workingDir(projectDir)
+      commandLine("node", "--print", "require.resolve('expo-notifications/package.json')")
+    }.standardOutput.asText.get().trim()
+  )
+).version
+
+dependencies {
+  implementation findProject(':expo-notifications') ?: "host.exp.exponent:expo.modules.notifications:${expoNotificationsVersion}"
+}
