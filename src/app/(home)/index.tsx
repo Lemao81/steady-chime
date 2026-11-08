@@ -18,6 +18,10 @@ import type { Settings } from '@/types'
 
 const FULL_WIDTH = Platform.OS === 'ios' ? [frame({ maxWidth: Infinity })] : [fillMaxWidth()]
 
+const DevTools: typeof import('@/components/DevTools').DevTools | null = __DEV__
+  ? require('@/components/DevTools').DevTools
+  : null
+
 export default function HomeScreen(): JSX.Element | null {
   const { settings } = useSettings()
   const permissions = useChimePermissions()
@@ -90,6 +94,7 @@ export default function HomeScreen(): JSX.Element | null {
               />
             </Column>
           )}
+          {DevTools !== null && <DevTools settings={settings} />}
         </Column>
       </Host>
     </View>

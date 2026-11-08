@@ -1,8 +1,16 @@
 import * as Notifications from 'expo-notifications'
 import { Platform } from 'react-native'
-import { APP_NAME, CHIME_SOUND_FILES, CHIME_TIMEOUT_MS, CHIME_VIBRATION_PATTERN } from '@/constants'
+import {
+  APP_NAME,
+  CHIME_IDENTIFIER_PREFIX,
+  CHIME_SOUND_FILES,
+  CHIME_TIMEOUT_MS,
+  CHIME_VIBRATION_PATTERN,
+} from '@/constants'
 import { chimeSlots } from '@/domain/chime-schedule'
 import type { ChimeSound, Settings, Strings } from '@/types'
+
+const syncListeners = new Set<() => void>()
 
 let pending: Promise<void> = Promise.resolve()
 
@@ -25,6 +33,18 @@ export async function ensureChimeChannel(settings: Settings, strings: Strings): 
   return channelId
 }
 
+export function chimeContent(
+  settings: Settings,
+  time: number,
+  formatTime: (time: number) => string,
+): Notifications.NotificationContentInput {
+  return {
+    title: `${APP_NAME} · ${formatTime(time)}`,
+    sound: CHIME_SOUND_FILES[settings.chimeSound],
+    data: { timeoutAfterMs: CHIME_TIMEOUT_MS },
+  }
+}
+
 async function applyChimes(
   settings: Settings,
   strings: Strings,
@@ -44,12 +64,8 @@ async function applyChimes(
   await Promise.all(
     slots.map((slot) =>
       Notifications.scheduleNotificationAsync({
-        identifier: `chime-${slot}`,
-        content: {
-          title: `${APP_NAME} · ${formatTime(slot)}`,
-          sound: CHIME_SOUND_FILES[settings.chimeSound],
-          data: { timeoutAfterMs: CHIME_TIMEOUT_MS },
-        },
+        identifier: `${CHIME_IDENTIFIER_PREFIX}${slot}`,
+        content: chimeContent(settings, slot, formatTime),
         trigger: {
           type: Notifications.SchedulableTriggerInputTypes.DAILY,
           channelId,
@@ -66,9 +82,26 @@ export function syncChimes(
   strings: Strings,
   formatTime: (time: number) => string,
 ): Promise<void> {
-  pending = pending.catch(() => undefined).then(() => applyChimes(settings, strings, formatTime))
+  pending = pending
+    .catch(() => undefined)
+    .then(() => applyChimes(settings, strings, formatTime))
+    .finally(notifyChimeSync)
 
   return pending
+}
+
+function notifyChimeSync(): void {
+  for (const listener of syncListeners) {
+    listener()
+  }
+}
+
+export function subscribeToChimeSync(listener: () => void): () => void {
+  syncListeners.add(listener)
+
+  return () => {
+    syncListeners.delete(listener)
+  }
 }
 
 export function configureForegroundChimes(): void {

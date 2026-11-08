@@ -39,5 +39,5 @@ When the last step of an issue is ticked, set the issue's `Status:` to `resolved
 
 ## [07 Verification](issues/07-verification.md)
 
-- [ ] 7.1 Development-only helpers
+- [x] 7.1 Development-only helpers
 - [ ] 7.2 Maestro E2E flows
