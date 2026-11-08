@@ -1,0 +1,13 @@
+appId: com.lemao81.steadychime
+---
+- runFlow: subflows/launch.yaml
+- runFlow: subflows/activate.yaml
+- tapOn:
+    id: toggle-activity
+- assertVisible: Activate
+- assertVisible:
+    id: next-chime
+    text: —
+- assertVisible:
+    id: scheduled-chime-count
+    text: "Scheduled Chimes: 0"

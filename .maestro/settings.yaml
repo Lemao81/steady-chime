@@ -1,0 +1,21 @@
+appId: com.lemao81.steadychime
+---
+- runFlow: subflows/launch.yaml
+- runFlow: subflows/activate.yaml
+- tapOn:
+    id: settings-summary
+- tapOn: 30 min
+- tapOn: 1 h
+- tapOn: (8:00 AM|08:00)
+- tapOn: (12:00 AM|00:00)
+- tapOn: 1 h
+- tapOn: 15 min
+- assertVisible: That would be more than 60 Chimes a day\..*
+- assertVisible: 1 h
+- tapOn:
+    id: navigation_bar_item_.*label_view
+    text: Home
+- assertVisible: Every 1 h · (12:00 AM|00:00)–(10:00 PM|22:00) · Soft Bell
+- assertVisible:
+    id: scheduled-chime-count
+    text: "Scheduled Chimes: 23"

@@ -1,0 +1,29 @@
+appId: com.lemao81.steadychime
+---
+- runFlow:
+    file: subflows/launch.yaml
+    env:
+      NOTIFICATIONS: unset
+- assertVisible:
+    id: scheduled-chime-count
+    text: "Scheduled Chimes: 0"
+- assertVisible: Activate
+- tapOn:
+    id: toggle-activity
+- tapOn: Allow
+- runFlow:
+    label: Allow exact alarms when Android asks for them
+    when:
+      visible: Allow setting alarms and reminders
+    commands:
+      - tapOn: Allow setting alarms and reminders
+      - back
+- assertVisible: Pause
+- assertVisible:
+    id: next-chime
+    text: "\\d{1,2}:\\d{2}( AM| PM)?"
+- assertNotVisible:
+    id: open-system-settings
+- assertVisible:
+    id: scheduled-chime-count
+    text: "Scheduled Chimes: 29"

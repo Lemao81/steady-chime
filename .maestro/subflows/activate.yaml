@@ -1,0 +1,9 @@
+appId: com.lemao81.steadychime
+---
+- assertVisible: Activate
+- tapOn:
+    id: toggle-activity
+- assertVisible: Pause
+- assertVisible:
+    id: scheduled-chime-count
+    text: "Scheduled Chimes: 29"
