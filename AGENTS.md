@@ -6,7 +6,7 @@ docs before writing any code — do not answer from memory.
 Use the `expo` MCP server: `search_documentation` to find pages, `read_documentation` to read
 them. Search returns `/versions/latest/` URLs; rewrite `latest` → `v57.0.0` before reading, so
 the content stays pinned to this project's SDK even after SDK 58 ships. Non-SDK pages
-(`/router/`, `/eas/`, guides) are unversioned and can be read as returned.
+(`/router/`, `/eas/`, guides) are unversioned: pass them to `read_documentation` as returned.
 
 # Expo skills
 
