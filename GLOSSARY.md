@@ -24,6 +24,10 @@ _Avoid_: Tick, occurrence, trigger
 The audio a Chime plays, picked from a small fixed list of short sounds shipped with the app.
 _Avoid_: Ringtone, tone
 
+**Chime Volume**:
+How loud a Chime sounds on Android, set in the app in 10 % steps from 10 % to 100 % of the phone's alarm volume; on iOS a Chime always sounds at the phone's notification volume.
+_Avoid_: Loudness, sound level, notification volume
+
 **Active** / **Paused**:
 The single global state of the app: while Active, Chimes sound at every Chime Slot, including after a phone restart; while Paused, none do. Losing notification permission forces the app to Paused.
 _Avoid_: Enabled, running, on/off, activated

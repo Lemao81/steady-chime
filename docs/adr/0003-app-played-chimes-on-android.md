@@ -6,7 +6,8 @@ On Android, a Chime's notification is silent and the app plays the Chime Sound i
 
 - The Chime Volume is a share of the phone's alarm volume: an app can scale its sound within a system volume stream but cannot exceed it without changing that stream.
 - Because the alarm stream ignores silent mode and, by default, Do Not Disturb, the app itself must stay silent while the phone is in silent or vibrate mode or Do Not Disturb, to keep the behaviour Chimes had when the OS played them.
-- Chime Sound previews in Settings must use the same playback path, so they sound like a real Chime.
+- The app also takes over what Android did for a sounding notification: it vibrates in vibrate mode whatever the Vibrate setting, stays silent during phone calls and whenever Android would not show the Chime's notification, and lowers other audio while the Chime plays instead of pausing it.
+- Chime Sound previews in Settings must use the same playback path, so they sound like a real Chime; being user-initiated, they play even in silent mode and Do Not Disturb.
 - Android and iOS now differ: Chime Volume is an Android-only setting, like Vibrate.
 
 ## Considered Options

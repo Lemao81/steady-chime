@@ -4,7 +4,7 @@ Neither iOS nor Android lets an app run indefinitely in the background, so every
 
 ## Consequences
 
-- There is no in-app volume: a Chime plays at the phones notification volume and obeys silent mode and Do Not Disturb.
+- There is no in-app volume on iOS: a Chime plays at the phones notification volume and obeys silent mode and Do Not Disturb. Android Chimes are played by the app since ADR 0003, so there the Chime Volume is set in the app.
 - iOS caps pending notifications at 64, so an Interval and Active Window combination is rejected when it would need more than ~60 Chime Slots per day; this is why 5- and 10-minute Intervals are not offered.
 
 ## Considered Options
