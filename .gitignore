@@ -44,5 +44,6 @@ yarn-error.*
 
 .idea/
 ANSWERS.md
+IDEAS.md
 RETRO.md
 .notes.local.txt
