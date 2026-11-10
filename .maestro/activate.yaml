@@ -14,9 +14,9 @@ appId: com.lemao81.steadychime.dev
 - runFlow:
     label: Allow exact alarms when Android asks for them
     when:
-      visible: Allow setting alarms and reminders
+      visible: "Allow setting alarms and reminders|Allow permission"
     commands:
-      - tapOn: Allow setting alarms and reminders
+      - tapOn: "Allow setting alarms and reminders|Allow permission"
       - back
 - assertVisible: Pause
 - assertVisible:
