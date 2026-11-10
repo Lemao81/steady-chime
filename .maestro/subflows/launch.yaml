@@ -1,10 +1,10 @@
-appId: com.lemao81.steadychime
+appId: com.lemao81.steadychime.dev
 ---
 - clearState
 - setPermissions:
     permissions:
       notifications: ${NOTIFICATIONS || "allow"}
-- openLink: steadychime://expo-development-client/?url=${METRO_URL || "http%3A%2F%2Flocalhost%3A8081"}&disableAutoLaunch=1&disableFab=1
+- openLink: steadychime-dev://expo-development-client/?url=${METRO_URL || "http%3A%2F%2Flocalhost%3A8081"}&disableAutoLaunch=1&disableFab=1
 - extendedWaitUntil:
     visible:
       id: toggle-activity

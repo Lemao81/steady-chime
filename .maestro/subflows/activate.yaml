@@ -1,4 +1,4 @@
-appId: com.lemao81.steadychime
+appId: com.lemao81.steadychime.dev
 ---
 - assertVisible: Activate
 - tapOn:

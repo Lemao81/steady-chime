@@ -1,18 +1,13 @@
 {
   "expo": {
-    "name": "SteadyChime",
-    "slug": "SteadyChime",
     "version": "1.0.0",
-    "scheme": "steadychime",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "supportsTablet": false,
-      "bundleIdentifier": "com.lemao81.steadychime"
+      "supportsTablet": false
     },
     "android": {
-      "package": "com.lemao81.steadychime",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/android-icon-foreground.png",
