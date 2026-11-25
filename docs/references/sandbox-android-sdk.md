@@ -10,7 +10,7 @@ Gradle downloads from `services.gradle.org`, `dl.google.com`, `repo.maven.apache
 
 ## Check
 
-`[ -x "$ANDROID_HOME/cmdline-tools/latest/bin/android" ]` succeeding means the setup is complete, because the environment step comes last. Otherwise run every setup step below; each is safe to repeat. The sandbox `node_modules` must be set up first: step 3 reads versions from it.
+`[ -x "$ANDROID_HOME/cmdline-tools/latest/bin/android" ]` succeeding means the setup is complete, because the environment step comes last. Otherwise run every setup step below; each is safe to repeat. The sandbox `node_modules` must be set up first: step 3 reads versions from it. The setup runs on x86_64 sandboxes only: Google ships the Linux SDK tools (`android`, build-tools, `aapt2`) for x86_64 alone, so an ARM sandbox (Apple Silicon host) leaves Android compiles to the host.
 
 ## Setup
 
