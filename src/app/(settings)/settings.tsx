@@ -11,7 +11,7 @@ import { useSettings } from '@/hooks/use-settings'
 import { useStrings } from '@/hooks/use-strings'
 import { useTimeFormat } from '@/hooks/use-time-format'
 import { formatInterval } from '@/localization/formatters'
-import type { ActiveWindow, Interval } from '@/types'
+import type { ActiveWindow, ChimeSound, Interval } from '@/types'
 
 const PLAY_ICON = Icon.select({
   ios: 'play.fill',
@@ -39,6 +39,11 @@ export default function SettingsScreen(): JSX.Element | null {
     if (!exceeds) {
       void updateSettings({ interval: nextInterval, activeWindow: nextActiveWindow })
     }
+  }
+
+  function changeChimeSound(sound: ChimeSound): void {
+    void updateSettings({ chimeSound: sound })
+    previewChimeSound(sound)
   }
 
   const intervalOptions = INTERVALS.map((i) => ({
@@ -86,7 +91,7 @@ export default function SettingsScreen(): JSX.Element | null {
               <SettingPicker
                 options={chimeSoundOptions}
                 selectedValue={settings.chimeSound}
-                onValueChange={(s) => void updateSettings({ chimeSound: s })}
+                onValueChange={changeChimeSound}
               />
             </Row>
             <Button

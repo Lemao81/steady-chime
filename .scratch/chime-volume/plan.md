@@ -7,7 +7,7 @@ When the last step of an issue is ticked, set the issue's `Status:` to `resolved
 
 ## [01 Play a Chime Sound when it is picked](issues/01-play-chime-sound-on-selection.md)
 
-- [ ] 1.1 Play on selection
+- [x] 1.1 Play on selection
 
 ## [02 Android Chimes played by the app](issues/02-app-played-chimes-on-android.md)
 

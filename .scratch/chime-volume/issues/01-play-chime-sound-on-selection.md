@@ -1,6 +1,6 @@
 # 01 Play a Chime Sound when it is picked
 
-Status: ready-for-agent
+Status: resolved
 Blocked by: None (can start immediately)
 
 On both platforms, picking a Chime Sound in Settings saves it and plays it right away, so sounds can be compared without an extra tap ([spec](../spec.md), user stories 24-25).
