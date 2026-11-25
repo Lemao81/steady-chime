@@ -7,18 +7,20 @@ This file is shared across projects. Apart from current project descriptions, an
 ## Tooling
 
 - Use pnpm as frontend package manager (`pnpm-lock.yaml`, `pnpm-workspace.yaml`), and run project CLIs with `pnpm exec` (`pnpm exec expo export`).
+- When adding or bumping a package, pick its newest version published longer ago than `minimumReleaseAge` in `pnpm-workspace.yaml` (dates from `pnpm view <package> time`).
 
 ## Agent Instructions
 
 - Treat a question as a request for its answer, capability questions (`can you …?`) included. Answering covers any undoable check that firms up the answer, undone once checked; the action the question is about is what you propose, and it waits for the user's go-ahead.
 - Before the first tool run of a session, prepare the environment it runs in:
     - Cloud session (`CLAUDE_CODE_REMOTE=true`) → read `docs/references/cloud-session.md` first.
-    - Local sandbox (`SANDBOX_NAME` set) → tools run from its own Linux `node_modules`, bind-mounted over the repo's shared one. Check `mountpoint -q node_modules`; when it fails, set the sandbox up per `docs/references/sandbox-node-modules.md` first. Run pnpm only on the mounted `node_modules`.
+    - Local sandbox (`SANDBOX_NAME` set, or `SANDBOX_VM_ID` in one created before sbx v0.39) → tools run from its own Linux `node_modules`, bind-mounted over the repo's shared one. Check `mountpoint -q node_modules`; when it fails, set the sandbox up per `docs/references/sandbox-node-modules.md` first. Run pnpm only on the mounted `node_modules`.
+    - Local sandbox → check that `jq -r .statusLine.command ~/.claude/settings.json` names `~/.claude/statusline.sh`; when it does not, set up the status line per `docs/references/sandbox-status-line.md` first.
     - Local sandbox in an Expo project (`expo` in `package.json` dependencies) → check `[ -x "$ANDROID_HOME/cmdline-tools/latest/bin/android" ]`; when it fails, install the Android SDK per `docs/references/sandbox-android-sdk.md` first.
 - In a local sandbox, install only with `pnpm install --frozen-lockfile`. To change dependencies, edit `package.json` and tell the user to run the install on the host; run the frozen install here too whenever the user reports an install on the host, or `[ pnpm-lock.yaml -nt node_modules/.modules.yaml ]` holds before a tool run.
 - When the sandbox firewall blocks a documentation site, stop and list every docs domain the task still needs; resume once the user has unblocked them or says to go without them. A subagent stops the same way and returns the list as its result.
 - Leave `electron` and `electron-forge` to the host.
-- If the project uses Biome: whenever you have edited files it checks, run `biome check --write` before handing back to the user.
+- If the project uses Biome or ESLint: whenever you have edited files they check, run each tool's fixer on them (`biome check --write`, `eslint --fix`) before handing back to the user.
 - Fix every finding a check reports, whether from your own run or a failed pre-commit hook, in the code; after a hook failure, re-stage and retry the commit. Ask first before a suppression comment, a linter config change, `--no-verify`, a fix that changes behaviour, or an edit to files outside the commit.
 - When a commit prints that a hook `was ignored because it's not set as executable`, run `chmod +x` on that hook, then `git hook run <hook>` to check the commit it skipped, and report both to the user.
 - Never execute `git commit` on your own without explicit instruction. After explicit instruction, commit directly to main — this is a solo project and does not use feature branches. A cloud session commits to its session branch instead.
@@ -43,6 +45,7 @@ This file is shared across projects. Apart from current project descriptions, an
 - Writing TypeScript → read `docs/references/typescript-code-style.md` first.
 - Writing C# → read `docs/references/csharp-code-style.md` first.
 - Writing Cypress tests → read `docs/references/cypress-tests.md` first.
+- Writing Playwright tests → read `docs/references/playwright-tests.md` first.
 - Running Maestro E2E flows or diagnosing a failed run → read `docs/references/maestro-e2e.md` first.
 - Working with shadcn/ui → read `docs/references/shadcn.md` first.
 - Adding or changing an API endpoint → read `docs/references/api-endpoints.md` first.
